@@ -1,0 +1,2834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FUN LEARNING - Scoobie's Quest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka', sans-serif;
+            overflow-x: hidden;
+            background: #54B4FF;
+        }
+
+        /* Stacked FUN LEARNING Title Styling */
+        .title-fun {
+            color: #FFD230;
+            text-shadow:
+                -3px -3px 0 #593116,
+                 3px -3px 0 #593116,
+                -3px  3px 0 #593116,
+                 3px  3px 0 #593116,
+                 0px  6px 0 #42220d,
+                 0px 10px 18px rgba(0,0,0,0.22);
+            letter-spacing: 0.03em;
+            line-height: 0.95;
+        }
+        .title-learning {
+            color: #FF7A22;
+            text-shadow:
+                -3px -3px 0 #593116,
+                 3px -3px 0 #593116,
+                -3px  3px 0 #593116,
+                 3px  3px 0 #593116,
+                 0px  6px 0 #42220d,
+                 0px 10px 18px rgba(0,0,0,0.22);
+            letter-spacing: 0.02em;
+            line-height: 1.02;
+        }
+
+        /* Cartoon White Outlined Hub Heading */
+        .cartoon-title {
+            color: #ffffff;
+            text-shadow:
+                -2px -2px 0 #3d2314,
+                 2px -2px 0 #3d2314,
+                -2px  2px 0 #3d2314,
+                 2px  2px 0 #3d2314,
+                 0px  4px 0 #3d2314;
+            letter-spacing: 0.02em;
+        }
+
+        /* Wooden Quest Card */
+        .quest-card {
+            background: #6B3E1E;
+            border: 4px solid #4a2810;
+            border-radius: 22px;
+            box-shadow: 0 7px 0 #3b1f0b, 0 12px 20px rgba(0, 0, 0, 0.22);
+            overflow: hidden;
+            transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.16s;
+            cursor: pointer;
+        }
+        .quest-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 0 #3b1f0b, 0 18px 26px rgba(0, 0, 0, 0.28);
+        }
+        .quest-card:active {
+            transform: translateY(3px) scale(0.98);
+            box-shadow: 0 3px 0 #3b1f0b;
+        }
+
+        /* Green Dotted Grass Top Strip */
+        .grass-top-bar {
+            height: 22px;
+            background-color: #44B533;
+            border-bottom: 3px solid #2d7d21;
+            background-image: radial-gradient(#29781d 32%, transparent 34%);
+            background-size: 18px 18px;
+            background-position: 4px 2px;
+        }
+
+        /* Cream Bottom Pill Label */
+        .cream-label-pill {
+            background: #FFF9E6;
+            border: 3px solid #522e14;
+            border-radius: 14px;
+            box-shadow: inset 0 -3px 0 #e8d9b5;
+        }
+
+        /* Big Orange GAME START Button */
+        .game-start-btn {
+            background: linear-gradient(180deg, #FF941A 0%, #FF6600 100%);
+            border: 4px solid #593116;
+            box-shadow: 0 7px 0 #42220d, 0 0 28px rgba(255, 166, 0, 0.75);
+            transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s;
+        }
+        .game-start-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 0 #42220d, 0 0 34px rgba(255, 180, 0, 0.9);
+        }
+        .game-start-btn:active {
+            transform: translateY(4px) scale(0.97);
+            box-shadow: 0 2px 0 #42220d;
+        }
+
+        .game-btn {
+            transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.1s;
+        }
+        .game-btn:active {
+            transform: translateY(4px) scale(0.95);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: floatSlow 2.8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.75); }
+            50% { transform: scale(1.06); box-shadow: 0 0 22px 8px rgba(250, 204, 21, 0.4); }
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes micPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.75); }
+            50% { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(244, 63, 94, 0); }
+        }
+        .mic-listening {
+            animation: micPulse 1.2s infinite;
+        }
+
+        @keyframes powerPop {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        .power-pop {
+            animation: powerPop 0.35s ease-out;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body class="min-h-screen w-full relative">
+
+    <!-- =========================================================================
+         SHARED SCENIC MAPLESTORY-STYLE BACKGROUND SVG (Screens 1 & 2)
+         ========================================================================= -->
+    <div id="scenicBackdrop" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+            <defs>
+                <linearGradient id="mapleSkyGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#54B4FF"/>
+                    <stop offset="65%" stop-color="#76C7FF"/>
+                    <stop offset="100%" stop-color="#9BE0FF"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Bright Sky Blue Gradient -->
+            <rect width="1440" height="900" fill="url(#mapleSkyGrad)"/>
+
+            <!-- Fluffy White Clouds + Floating Music Notes -->
+            <g fill="#ffffff" opacity="0.95">
+                <!-- Left Cloud -->
+                <circle cx="55" cy="68" r="36"/>
+                <circle cx="95" cy="56" r="46"/>
+                <circle cx="140" cy="68" r="35"/>
+                <rect x="25" y="65" width="145" height="36" rx="18"/>
+                <!-- Right Cloud -->
+                <circle cx="1250" cy="88" r="38"/>
+                <circle cx="1298" cy="74" r="50"/>
+                <circle cx="1350" cy="88" r="38"/>
+                <rect x="1215" y="85" width="170" height="38" rx="19"/>
+            </g>
+            <!-- Floating Music Notes -->
+            <text x="16" y="132" font-size="28" fill="#1e3a8a" opacity="0.55">♪</text>
+            <text x="1402" y="155" font-size="24" fill="#1e3a8a" opacity="0.45">♫</text>
+
+            <!-- Floating Grassy Islands with Gold Sparkles -->
+            <g transform="translate(335, 58)">
+                <path d="M10,16 L112,16 Q118,16 112,26 L88,54 Q61,66 34,54 L10,26 Z" fill="#8B5A2B" stroke="#593116" stroke-width="2.5"/>
+                <rect x="6" y="6" width="110" height="16" rx="8" fill="#52C42B" stroke="#2D7D21" stroke-width="2"/>
+                <text x="128" y="4" font-size="20" fill="#FFD230">✨</text>
+            </g>
+            <g transform="translate(965, 68)">
+                <path d="M10,16 L118,16 Q124,16 118,26 L92,56 Q64,68 36,56 L10,26 Z" fill="#8B5A2B" stroke="#593116" stroke-width="2.5"/>
+                <rect x="6" y="6" width="116" height="16" rx="8" fill="#52C42B" stroke="#2D7D21" stroke-width="2"/>
+                <text x="-18" y="8" font-size="18" fill="#FFD230">✨</text>
+            </g>
+
+            <!-- Layered Pastel Teal Snow-Capped Mountains -->
+            <polygon points="-40,740 110,545 270,740" fill="#7AC5D1"/>
+            <polygon points="110,545 148,595 126,604 110,584 92,604 72,594" fill="#ffffff" opacity="0.82"/>
+
+            <polygon points="160,740 390,465 620,740" fill="#82CCD8"/>
+            <polygon points="390,465 446,532 414,544 390,516 364,544 334,532" fill="#ffffff" opacity="0.86"/>
+
+            <polygon points="860,740 1075,485 1290,740" fill="#7AC5D1"/>
+            <polygon points="1075,485 1128,548 1098,558 1075,532 1052,558 1022,548" fill="#ffffff" opacity="0.84"/>
+
+            <polygon points="1170,740 1365,565 1520,740" fill="#82CCD8"/>
+            <polygon points="1365,565 1405,605 1384,613 1365,595 1346,613 1326,605" fill="#ffffff" opacity="0.82"/>
+
+            <!-- Rolling Lime-Green Hills -->
+            <path d="M-60,775 Q280,685 620,765 T1280,745 T1520,765 L1520,900 L-60,900 Z" fill="#8CE043"/>
+            <path d="M-60,825 Q420,775 880,825 T1520,810 L1520,900 L-60,900 Z" fill="#63C732"/>
+
+            <!-- Spotted Mushroom Houses (Cyan, Red, Orange, Purple) & Round Trees -->
+            <!-- Left Cyan Mushroom -->
+            <g transform="translate(18, 775)">
+                <rect x="24" y="34" width="32" height="32" rx="6" fill="#FFF3D6" stroke="#593116" stroke-width="2.5"/>
+                <path d="M6,38 Q40,-4 74,38 Z" fill="#18B8C9" stroke="#593116" stroke-width="2.5"/>
+                <circle cx="26" cy="22" r="6" fill="#ffffff"/>
+                <circle cx="52" cy="20" r="7" fill="#ffffff"/>
+            </g>
+
+            <!-- Left Round Tree & Cute Green Slime -->
+            <g transform="translate(105, 742)">
+                <rect x="28" y="52" width="14" height="44" rx="5" fill="#7A441E"/>
+                <circle cx="35" cy="36" r="28" fill="#3FA629"/>
+                <circle cx="22" cy="44" r="19" fill="#52C437"/>
+                <circle cx="48" cy="44" r="19" fill="#52C437"/>
+            </g>
+            <!-- Cute Green Slime Peeking -->
+            <g transform="translate(118, 804)">
+                <path d="M6,36 Q6,6 30,6 Q54,6 54,36 Z" fill="#5CD647" stroke="#2D7D21" stroke-width="2.5"/>
+                <circle cx="22" cy="22" r="3" fill="#1e293b"/>
+                <circle cx="38" cy="22" r="3" fill="#1e293b"/>
+            </g>
+
+            <!-- Big Orange Spotted Mushroom House -->
+            <g transform="translate(235, 722)">
+                <rect x="30" y="62" width="60" height="58" rx="8" fill="#FFF3D6" stroke="#593116" stroke-width="3"/>
+                <rect x="50" y="84" width="20" height="36" rx="10" fill="#7A441E"/>
+                <path d="M6,68 Q60,-6 114,68 Z" fill="#F26A1B" stroke="#593116" stroke-width="3"/>
+                <circle cx="36" cy="42" r="10" fill="#ffffff"/>
+                <circle cx="80" cy="40" r="11" fill="#ffffff"/>
+                <circle cx="58" cy="20" r="8" fill="#ffffff"/>
+            </g>
+
+            <!-- Center-Left Round Tree -->
+            <g transform="translate(445, 738)">
+                <rect x="28" y="54" width="15" height="46" rx="5" fill="#7A441E"/>
+                <circle cx="35" cy="36" r="30" fill="#3FA629"/>
+                <circle cx="20" cy="45" r="20" fill="#52C437"/>
+                <circle cx="50" cy="45" r="20" fill="#52C437"/>
+            </g>
+
+            <!-- Center Wooden Double-Arrow Signpost -->
+            <g transform="translate(690, 762)">
+                <rect x="22" y="10" width="8" height="72" rx="3" fill="#7A441E" stroke="#42220d" stroke-width="2.5"/>
+                <polygon points="48,14 12,14 4,22 12,30 48,30" fill="#D99B52" stroke="#42220d" stroke-width="2.5"/>
+                <polygon points="4,36 40,36 48,44 40,52 4,52" fill="#C7863E" stroke="#42220d" stroke-width="2.5"/>
+            </g>
+
+            <!-- Big Red Spotted Mushroom House -->
+            <g transform="translate(910, 722)">
+                <rect x="30" y="62" width="60" height="58" rx="8" fill="#FFF3D6" stroke="#593116" stroke-width="3"/>
+                <rect x="50" y="84" width="20" height="36" rx="10" fill="#7A441E"/>
+                <path d="M6,68 Q60,-6 114,68 Z" fill="#E63939" stroke="#593116" stroke-width="3"/>
+                <circle cx="36" cy="42" r="10" fill="#ffffff"/>
+                <circle cx="80" cy="40" r="11" fill="#ffffff"/>
+                <circle cx="58" cy="20" r="8" fill="#ffffff"/>
+            </g>
+
+            <!-- Right Trees, Gold Mushroom, Pink & Purple Slimes -->
+            <g transform="translate(1115, 738)">
+                <rect x="28" y="54" width="15" height="46" rx="5" fill="#7A441E"/>
+                <circle cx="35" cy="36" r="30" fill="#3FA629"/>
+                <circle cx="20" cy="45" r="20" fill="#52C437"/>
+                <circle cx="50" cy="45" r="20" fill="#52C437"/>
+            </g>
+            <g transform="translate(1225, 738)">
+                <rect x="26" y="54" width="52" height="50" rx="8" fill="#FFF3D6" stroke="#593116" stroke-width="3"/>
+                <path d="M6,58 Q52,-4 98,58 Z" fill="#F59E0B" stroke="#593116" stroke-width="3"/>
+                <circle cx="34" cy="36" r="9" fill="#ffffff"/>
+                <circle cx="70" cy="34" r="9" fill="#ffffff"/>
+            </g>
+            <!-- Cute Pink Slime -->
+            <g transform="translate(1248, 804)">
+                <path d="M6,36 Q6,6 30,6 Q54,6 54,36 Z" fill="#F472B6" stroke="#9D174D" stroke-width="2.5"/>
+                <circle cx="22" cy="22" r="3" fill="#1e293b"/>
+                <circle cx="38" cy="22" r="3" fill="#1e293b"/>
+            </g>
+            <!-- Cute Purple Mushroom/Slime -->
+            <g transform="translate(1335, 775)">
+                <rect x="24" y="34" width="32" height="32" rx="6" fill="#FFF3D6" stroke="#593116" stroke-width="2.5"/>
+                <path d="M6,38 Q40,-4 74,38 Z" fill="#9333EA" stroke="#593116" stroke-width="2.5"/>
+                <circle cx="26" cy="22" r="6" fill="#ffffff"/>
+                <circle cx="52" cy="20" r="7" fill="#ffffff"/>
+            </g>
+
+            <!-- Wooden Picket Fence Along Bottom -->
+            <g fill="#9C5A28" stroke="#593116" stroke-width="2">
+                <rect x="0" y="846" width="1440" height="10"/>
+                <rect x="0" y="866" width="1440" height="10"/>
+                <!-- Fence Posts -->
+                <rect x="18" y="834" width="14" height="50" rx="3"/>
+                <rect x="74" y="834" width="14" height="50" rx="3"/>
+                <rect x="130" y="834" width="14" height="50" rx="3"/>
+                <rect x="186" y="834" width="14" height="50" rx="3"/>
+                <rect x="242" y="834" width="14" height="50" rx="3"/>
+                <rect x="298" y="834" width="14" height="50" rx="3"/>
+                <rect x="354" y="834" width="14" height="50" rx="3"/>
+                <rect x="410" y="834" width="14" height="50" rx="3"/>
+                <rect x="466" y="834" width="14" height="50" rx="3"/>
+                <rect x="522" y="834" width="14" height="50" rx="3"/>
+                <rect x="578" y="834" width="14" height="50" rx="3"/>
+                <rect x="634" y="834" width="14" height="50" rx="3"/>
+                <rect x="690" y="834" width="14" height="50" rx="3"/>
+                <rect x="746" y="834" width="14" height="50" rx="3"/>
+                <rect x="802" y="834" width="14" height="50" rx="3"/>
+                <rect x="858" y="834" width="14" height="50" rx="3"/>
+                <rect x="914" y="834" width="14" height="50" rx="3"/>
+                <rect x="970" y="834" width="14" height="50" rx="3"/>
+                <rect x="1026" y="834" width="14" height="50" rx="3"/>
+                <rect x="1082" y="834" width="14" height="50" rx="3"/>
+                <rect x="1138" y="834" width="14" height="50" rx="3"/>
+                <rect x="1194" y="834" width="14" height="50" rx="3"/>
+                <rect x="1250" y="834" width="14" height="50" rx="3"/>
+                <rect x="1306" y="834" width="14" height="50" rx="3"/>
+                <rect x="1362" y="834" width="14" height="50" rx="3"/>
+                <rect x="1418" y="834" width="14" height="50" rx="3"/>
+            </g>
+            <!-- Bottom Bright Turf Strip -->
+            <rect x="0" y="882" width="1440" height="18" fill="#3AB528"/>
+        </svg>
+    </div>
+
+    <!-- =========================================================================
+         SCREEN 1: 'FUN LEARNING' START / LOGIN PHASE (Matching Screenshot 2)
+         ========================================================================= -->
+    <section id="loginScreen" class="relative z-10 min-h-screen w-full flex flex-col items-center justify-center px-4 py-6">
+        
+        <!-- Top-Left Circular Yellow Music Toggle Button -->
+        <button id="loginMusicBtn" onclick="toggleMusic()" aria-label="Toggle Music"
+            class="game-btn fixed top-3 left-3 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#FFD230] hover:bg-amber-300 border-4 border-[#6B3E1E] shadow-[0_4px_0_#42220d] flex items-center justify-center text-2xl sm:text-3xl text-[#42220d] z-20">
+            <span id="loginMusicIcon">🎵</span>
+        </button>
+
+        <!-- Top-Right Progress Database Button -->
+        <button onclick="openProgressDatabase()"
+            class="game-btn fixed top-3 right-3 px-4 py-2.5 rounded-full bg-[#FFF9E6] hover:bg-amber-100 border-4 border-[#6B3E1E] shadow-[0_4px_0_#42220d] flex items-center gap-2 font-bold text-[#3d2314] text-sm sm:text-base z-20">
+            <span>📊</span>
+            <span>Progress Database</span>
+        </button>
+
+        <!-- Centerpiece Stacked Bold Outlined Logo -->
+        <div class="text-center mb-4 sm:mb-5 animate-float">
+            <div class="title-fun text-5xl sm:text-7xl md:text-8xl font-bold select-none">FUN</div>
+            <div class="title-learning text-4xl sm:text-6xl md:text-7xl font-bold select-none mt-1">LEARNING</div>
+        </div>
+
+        <!-- Cream Rounded Wooden-Bordered Login Card -->
+        <div class="w-full max-w-md bg-[#FFF9E6] border-4 border-[#6B3E1E] rounded-[1.85rem] p-4 sm:p-6 shadow-[0_8px_0_#42220d,0_16px_28px_rgba(0,0,0,0.22)] flex flex-col gap-4">
+            
+            <!-- 1. Character Name & Typed Age Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="sm:col-span-2">
+                    <label for="charNameInput" class="flex items-center justify-center gap-1.5 text-[#593116] font-bold text-base sm:text-lg mb-1.5">
+                        <span>🏷️</span>
+                        <span>Character Name:</span>
+                    </label>
+                    <input id="charNameInput" type="text" maxlength="14" value="Scoobie" placeholder="Scoobie"
+                        class="w-full py-2.5 px-4 rounded-2xl bg-white border-3 border-[#8B5A2B] focus:border-[#FF7A22] focus:outline-none text-center text-xl sm:text-2xl font-bold text-[#3d2314] shadow-inner" />
+                </div>
+
+                <div>
+                    <label for="childAgeInput" class="flex items-center justify-center gap-1 text-[#593116] font-bold text-base sm:text-lg mb-1.5">
+                        <span>🎂</span>
+                        <span>Child's Age:</span>
+                    </label>
+                    <input id="childAgeInput" type="number" min="1" max="15" inputmode="numeric" value="3" placeholder="3"
+                        oninput="onTypedAgeChange()"
+                        class="w-full py-2.5 px-3 rounded-2xl bg-white border-3 border-[#8B5A2B] focus:border-[#44B533] focus:outline-none text-center text-xl sm:text-2xl font-bold text-[#166534] shadow-inner" />
+                </div>
+            </div>
+
+            <!-- Live Adaptive Difficulty Tier Indicator -->
+            <div class="bg-[#dcfce7] border-2 border-[#44B533] rounded-2xl px-3 py-2 text-center">
+                <div id="ageTierBadgeText" class="font-bold text-[#166534] text-xs sm:text-sm">
+                    🐣 Age 3 • Tier 1: Sprout Basics
+                </div>
+                <div id="ageHintCaption" class="text-[11px] sm:text-xs font-semibold text-[#15803d] mt-0.5">
+                    Zero Reading • Shapes, Colours &amp; Animal Sounds
+                </div>
+            </div>
+
+            <!-- 2. Pick Hero Visual Selector -->
+            <div>
+                <div class="text-center text-[#593116] font-bold text-sm sm:text-base mb-1.5">
+                    🦸 Pick Hero:
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" data-hero="Sprout" onclick="selectHeroSprite('🍄', 'Sprout', this)"
+                        class="hero-pill game-btn py-2 px-2 rounded-2xl border-3 border-[#FF7A22] bg-[#ffedd5] flex items-center justify-center gap-1.5 font-bold text-[#593116] text-sm sm:text-base">
+                        <span class="text-2xl">🍄</span><span>Sprout</span>
+                    </button>
+                    <button type="button" data-hero="Momo" onclick="selectHeroSprite('🐱', 'Momo', this)"
+                        class="hero-pill game-btn py-2 px-2 rounded-2xl border-3 border-[#d6c39c] bg-white flex items-center justify-center gap-1.5 font-bold text-[#593116] text-sm sm:text-base">
+                        <span class="text-2xl">🐱</span><span>Momo</span>
+                    </button>
+                    <button type="button" data-hero="Pip" onclick="selectHeroSprite('🐰', 'Pip', this)"
+                        class="hero-pill game-btn py-2 px-2 rounded-2xl border-3 border-[#d6c39c] bg-white flex items-center justify-center gap-1.5 font-bold text-[#593116] text-sm sm:text-base">
+                        <span class="text-2xl">🐰</span><span>Pip</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Big Glowing Orange GAME START ► Button -->
+        <button onclick="handleGameStart()"
+            class="game-start-btn mt-5 px-9 sm:px-12 py-3.5 sm:py-4 rounded-full text-white text-2xl sm:text-3xl font-bold flex items-center gap-3 tracking-wide">
+            <span>GAME START</span>
+            <span>►</span>
+        </button>
+    </section>
+
+    <!-- =========================================================================
+         SCREEN 2: 'CHOOSE YOUR QUEST!' HUB (Matching Screenshot 1)
+         ========================================================================= -->
+    <section id="hubScreen" class="hidden relative z-10 min-h-screen w-full pb-16">
+        
+        <!-- Compact Top Bar with Player Badge, Star Counter, Progress DB & Switch Player -->
+        <header class="max-w-6xl mx-auto px-4 pt-4 flex flex-wrap items-center justify-between gap-3">
+            <!-- Left Music Toggle -->
+            <button onclick="toggleMusic()" aria-label="Toggle Music"
+                class="game-btn w-12 h-12 rounded-full bg-[#FFD230] hover:bg-amber-300 border-4 border-[#6B3E1E] shadow-[0_4px_0_#42220d] flex items-center justify-center text-2xl text-[#42220d]">
+                <span id="hubMusicIcon">🎵</span>
+            </button>
+
+            <!-- Right Player Badge -->
+            <div class="bg-[#FFF9E6]/95 border-4 border-[#6B3E1E] rounded-full px-3.5 py-1.5 shadow-[0_5px_0_#42220d] flex flex-wrap items-center gap-2 sm:gap-3">
+                <div id="hubAvatarBadge" class="w-10 h-10 rounded-full bg-amber-200 border-2 border-[#6B3E1E] flex items-center justify-center text-2xl">
+                    🍄
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="hubNameLabel" class="font-bold text-[#3d2314] text-base sm:text-lg">Scoobie</span>
+                    <span id="hubAgeBadge" class="px-2.5 py-0.5 rounded-full bg-[#44B533] text-white font-bold text-xs">Age 3</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-200 text-[#593116] font-bold text-xs sm:text-sm">
+                        ⭐ <span id="hubStarsLabel">0</span>
+                    </span>
+                </div>
+                <button onclick="openProgressDatabase()"
+                    class="game-btn px-3 py-1 rounded-full bg-[#38bdf8] hover:bg-sky-500 border-2 border-[#593116] text-white font-bold text-xs sm:text-sm shadow flex items-center gap-1">
+                    <span>📊</span><span>Progress DB</span>
+                </button>
+                <button onclick="switchPlayerScreen()"
+                    class="game-btn px-3 py-1 rounded-full bg-[#FF7A22] hover:bg-orange-500 border-2 border-[#593116] text-white font-bold text-xs sm:text-sm shadow">
+                    Switch Player
+                </button>
+            </div>
+        </header>
+
+        <!-- Main "Choose Your Quest!" Wooden & Grass Card Board -->
+        <main class="max-w-6xl mx-auto px-4 pt-5 sm:pt-7">
+            <div class="flex items-center gap-3 mb-5 sm:mb-6 pl-1">
+                <!-- Wooden Double-Arrow Signpost Icon -->
+                <svg width="46" height="54" viewBox="0 0 46 54" class="shrink-0 drop-shadow">
+                    <rect x="20" y="6" width="6" height="46" rx="2" fill="#6B3E1E" stroke="#3d2314" stroke-width="2"/>
+                    <polygon points="6,10 34,10 40,16 34,22 6,22" fill="#e5a95c" stroke="#3d2314" stroke-width="2"/>
+                    <polygon points="40,26 12,26 6,32 12,38 40,38" fill="#d48c46" stroke="#3d2314" stroke-width="2"/>
+                </svg>
+                <h1 class="cartoon-title text-3xl sm:text-4xl md:text-5xl font-bold">
+                    Choose Your Quest!
+                </h1>
+            </div>
+
+            <!-- Responsive 4-Column Quest Card Grid -->
+            <div id="questGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                <!-- Populated dynamically -->
+            </div>
+        </main>
+    </section>
+
+    <!-- =========================================================================
+         SCREEN 3: PLAYABLE MAPLE-STYLE 2D PLATFORMER STAGE VIEW
+         ========================================================================= -->
+    <section id="stageScreen" class="hidden fixed inset-0 z-30 overflow-hidden">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Top Stage HUD -->
+        <div class="fixed top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none z-40">
+            <!-- Back to Quests Button -->
+            <button onclick="returnToHub()"
+                class="game-btn pointer-events-auto px-4 py-2.5 rounded-2xl bg-[#FFF9E6] hover:bg-amber-100 border-4 border-[#6B3E1E] text-[#3d2314] font-bold text-base sm:text-lg shadow-[0_5px_0_#42220d] flex items-center gap-1.5">
+                <span>← Quests</span>
+            </button>
+
+            <!-- Hero Power & Boss HP Pill -->
+            <div class="pointer-events-auto bg-white/95 border-4 border-amber-400 rounded-full px-4 py-1.5 shadow-lg flex items-center gap-3 sm:gap-4">
+                <div class="flex items-center gap-1.5 font-bold text-base sm:text-xl text-orange-600">
+                    <span>⚡</span>
+                    <span id="heroPowerDisplay">0</span>
+                    <span class="text-xs sm:text-sm text-amber-800 hidden sm:inline">Power</span>
+                </div>
+                <div class="w-0.5 h-6 bg-amber-300"></div>
+                <div class="flex items-center gap-1.5 font-bold text-base sm:text-xl text-rose-600">
+                    <span>👑</span>
+                    <span id="bossHpDisplay">90</span>
+                    <span class="text-xs sm:text-sm text-rose-800">HP</span>
+                </div>
+            </div>
+
+            <!-- Hear Again & Music Controls -->
+            <div class="flex items-center gap-2 pointer-events-auto">
+                <button onclick="repeatStageVoice()" aria-label="Hear Again"
+                    class="game-btn animate-pulse-glow px-3.5 py-2.5 rounded-full bg-sky-400 hover:bg-sky-500 border-4 border-white text-white font-bold text-base sm:text-lg shadow-[0_5px_0_#0284c7] flex items-center gap-1.5">
+                    <span>🔊</span>
+                    <span class="hidden sm:inline">Hear Again</span>
+                </button>
+                <button onclick="toggleMusic()" aria-label="Toggle Music"
+                    class="game-btn w-12 h-12 rounded-full bg-[#FFD230] border-4 border-[#6B3E1E] text-[#42220d] text-xl shadow-[0_4px_0_#42220d] flex items-center justify-center">
+                    <span id="stageMusicIcon">🎵</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Visual Non-Reading Clue Banner -->
+        <div class="fixed top-20 sm:top-22 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
+            <div onclick="repeatStageVoice()"
+                class="cursor-pointer bg-white/95 backdrop-blur-md border-4 border-[#6B3E1E] rounded-3xl px-6 py-2.5 shadow-xl flex items-center gap-4">
+                <div id="stageClueVisual" class="text-3xl sm:text-4xl font-bold text-[#3d2314] flex items-center justify-center">
+                    🎨
+                </div>
+                <span class="w-10 h-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center text-xl">🔊</span>
+            </div>
+        </div>
+
+        <!-- Giant Toddler-Friendly On-Screen Touch / Click Controls -->
+        <div class="fixed bottom-4 left-4 right-4 flex items-end justify-between pointer-events-none z-40">
+            <div class="flex items-center gap-3 sm:gap-4 pointer-events-auto">
+                <button id="btnLeft"
+                    class="game-btn w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white/95 active:bg-amber-200 border-4 border-[#6B3E1E] shadow-[0_7px_0_#42220d] flex items-center justify-center text-4xl sm:text-5xl text-[#6B3E1E]">
+                    ◀
+                </button>
+                <button id="btnRight"
+                    class="game-btn w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white/95 active:bg-amber-200 border-4 border-[#6B3E1E] shadow-[0_7px_0_#42220d] flex items-center justify-center text-4xl sm:text-5xl text-[#6B3E1E]">
+                    ▶
+                </button>
+            </div>
+
+            <div class="pointer-events-auto">
+                <button id="btnJump"
+                    class="game-btn w-22 h-22 sm:w-26 sm:h-26 p-5 rounded-full bg-rose-500 active:bg-rose-600 border-4 border-white shadow-[0_8px_0_#9f1239] flex items-center justify-center text-4xl sm:text-5xl text-white">
+                    ▲
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         INTERACTIVE GATE MODAL (TRACING RUNE GATE & SPEAKING PARROT GUARDIAN)
+         ========================================================================= -->
+    <div id="gateModal" class="hidden fixed inset-0 bg-sky-950/65 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-[#FFF9E6] w-full max-w-lg rounded-[2rem] border-8 border-[#6B3E1E] shadow-2xl p-5 sm:p-6 flex flex-col items-center relative">
+            
+            <div class="w-full flex items-center justify-between mb-3">
+                <button onclick="repeatStageVoice()"
+                    class="game-btn animate-pulse-glow w-14 h-14 rounded-full bg-sky-400 border-4 border-white text-white text-3xl shadow-[0_4px_0_#0284c7] flex items-center justify-center">
+                    🔊
+                </button>
+                <div id="gateTitleVisual" class="text-3xl sm:text-4xl font-bold text-[#593116]">✏️</div>
+                <button onclick="closeGateModal()"
+                    class="game-btn w-11 h-11 rounded-full bg-amber-200 border-3 border-[#6B3E1E] text-[#3d2314] font-bold text-xl flex items-center justify-center">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Tracing Canvas View -->
+            <div id="tracingGateView" class="hidden w-full flex flex-col items-center">
+                <div class="relative w-full h-56 sm:h-64 bg-white rounded-3xl border-4 border-purple-400 shadow-inner overflow-hidden touch-none">
+                    <canvas id="tracingCanvas" class="w-full h-full cursor-crosshair"></canvas>
+                </div>
+                <div class="w-full bg-purple-200 h-4 rounded-full overflow-hidden mt-3 border-2 border-purple-400">
+                    <div id="traceProgressBar" class="bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 h-full w-0 transition-all duration-150"></div>
+                </div>
+                <div class="flex items-center gap-3 mt-4">
+                    <button onclick="clearTracingCanvas()"
+                        class="game-btn px-5 py-3 rounded-2xl bg-white border-3 border-slate-300 text-slate-700 font-bold text-lg">
+                        🔄
+                    </button>
+                    <button onclick="finishTracingGate(true)"
+                        class="game-btn px-7 py-3 rounded-2xl bg-[#44B533] hover:bg-green-600 border-4 border-white text-white font-bold text-xl shadow-[0_5px_0_#1e5e15]">
+                        ⭐ Open Gate!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Speaking Parrot Guardian View -->
+            <div id="speakingGateView" class="hidden w-full flex flex-col items-center">
+                <div class="bg-white border-4 border-rose-300 rounded-3xl p-5 w-full flex flex-col items-center">
+                    <div id="speakTargetEmoji" class="text-7xl sm:text-8xl mb-1 animate-float">🐮</div>
+                    <div id="speakTargetWord" class="text-3xl font-bold text-rose-600 mb-3">"Moo!"</div>
+
+                    <!-- Animated Volume Bar -->
+                    <div class="w-48 h-3 bg-rose-100 rounded-full overflow-hidden mb-3 border border-rose-300">
+                        <div id="micVolumeBar" class="h-full w-1/6 bg-rose-500 transition-all duration-150"></div>
+                    </div>
+
+                    <button id="micBtn" onclick="startParrotMic()"
+                        class="game-btn w-20 h-20 rounded-full bg-rose-500 border-4 border-white text-white text-4xl shadow-[0_6px_0_#9f1239] flex items-center justify-center mb-2">
+                        🎤
+                    </button>
+                    <div id="micStatusLabel" class="text-xs sm:text-sm font-bold text-slate-500 text-center mb-3">
+                        Tap microphone to speak, or tap the green star below!
+                    </div>
+                    <button onclick="finishSpeakingGate()"
+                        class="game-btn w-full py-3.5 rounded-2xl bg-[#44B533] hover:bg-green-600 border-4 border-white text-white font-bold text-xl shadow-[0_5px_0_#1e5e15]">
+                        ⭐ I Said It!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         POWER-UP SPINNER MODAL (+5 to +20 Power Reward on Correct Answer!)
+         ========================================================================= -->
+    <div id="spinnerModal" class="hidden fixed inset-0 bg-sky-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-[#FFF9E6] w-full max-w-md rounded-[2.2rem] border-8 border-[#6B3E1E] shadow-2xl p-6 flex flex-col items-center text-center">
+            <div class="text-2xl sm:text-3xl font-bold text-[#3d2314] mb-1">⚡ Power-Up Wheel! ⚡</div>
+            <div id="spinnerSubtitle" class="text-sm sm:text-base font-bold text-[#8B5A2B] mb-4">
+                Tap SPIN to power up for the Boss!
+            </div>
+
+            <!-- Spinning Wheel Container -->
+            <div class="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center mb-4">
+                <!-- Top Pointer Triangle -->
+                <div class="absolute -top-3 z-20 text-4xl text-rose-600 drop-shadow">▼</div>
+                <canvas id="wheelCanvas" width="280" height="280" class="w-full h-full rounded-full border-8 border-[#6B3E1E] shadow-xl bg-white"></canvas>
+                <!-- Center Hub Button -->
+                <button id="spinWheelBtn" onclick="triggerPowerWheelSpin()"
+                    class="game-btn absolute w-20 h-20 rounded-full bg-gradient-to-b from-[#FF941A] to-[#FF6600] border-4 border-white text-white font-bold text-lg shadow-lg flex items-center justify-center">
+                    SPIN!
+                </button>
+            </div>
+
+            <div id="spinResultBanner" class="hidden text-2xl sm:text-3xl font-bold text-[#44B533] bg-emerald-100 border-3 border-emerald-400 rounded-2xl px-6 py-2 power-pop">
+                +15 ⚡ Power!
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         PROGRESS DATABASE MODAL / SCREEN (Parents & Teachers Analytics & Records)
+         ========================================================================= -->
+    <div id="progressDbModal" class="hidden fixed inset-0 bg-sky-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="bg-[#FFF9E6] w-full max-w-4xl rounded-[2.2rem] border-8 border-[#6B3E1E] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="grass-top-bar"></div>
+            
+            <!-- Modal Header -->
+            <div class="p-4 sm:p-6 border-b-4 border-[#e8d9b5] flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-[#FFD230] border-3 border-[#6B3E1E] flex items-center justify-center text-2xl shadow">
+                        📊
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-[#3d2314]">Progress Database</h2>
+                        <div class="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#8B5A2B]">
+                            <span id="dbSyncStatusBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-400">
+                                🟢 Synced &amp; Saved
+                            </span>
+                            <span id="dbRecordCountLabel">0 Player Records</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="exportProgressCSV()"
+                        class="game-btn px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 border-3 border-[#3d2314] text-white font-bold text-xs sm:text-sm shadow">
+                        📥 Export CSV
+                    </button>
+                    <button onclick="exportProgressJSON()"
+                        class="game-btn px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 border-3 border-[#3d2314] text-white font-bold text-xs sm:text-sm shadow">
+                        📄 Export JSON
+                    </button>
+                    <button onclick="closeProgressDatabase()" aria-label="Close Database"
+                        class="game-btn w-11 h-11 rounded-full bg-amber-200 hover:bg-amber-300 border-3 border-[#6B3E1E] text-[#3d2314] font-bold text-xl flex items-center justify-center">
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Player Records Body -->
+            <div id="progressDbList" class="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1">
+                <!-- Populated dynamically from Firestore / Local Database -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        /**
+         * ============================================================================
+         * 0. PERSISTENT PROGRESS DATABASE (FIRESTORE CLOUD + LOCAL STORAGE BACKUP)
+         * ============================================================================
+         */
+        const LOCAL_DB_KEY = 'funLearningScoobie_DB_v2';
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let cloudReady = false;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'scoobie-fun-learning';
+
+        // In-memory cache of all player records keyed by playerKey (name_age)
+        let playerDatabase = {};
+
+        function makePlayerKey(name, exactAge) {
+            const cleanName = (name || 'Scoobie').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_');
+            const cleanAge = Math.max(1, Math.min(15, parseInt(exactAge, 10) || 3));
+            return `${cleanName}_age_${cleanAge}`;
+        }
+
+        function loadLocalDatabase() {
+            try {
+                const raw = localStorage.getItem(LOCAL_DB_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === 'object') {
+                        playerDatabase = parsed;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function saveLocalDatabase() {
+            try {
+                localStorage.setItem(LOCAL_DB_KEY, JSON.stringify(playerDatabase));
+            } catch (e) {}
+        }
+
+        async function initCloudDatabase() {
+            loadLocalDatabase();
+            try {
+                if (typeof __firebase_config === 'undefined') {
+                    updateDbStatusBadge(false);
+                    return;
+                }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const cred = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = cred.user;
+                } else {
+                    const cred = await signInAnonymously(auth);
+                    currentUser = cred.user;
+                }
+
+                if (!currentUser) return;
+                cloudReady = true;
+                updateDbStatusBadge(true);
+
+                // Listen to real-time updates in /artifacts/{appId}/public/data/scoobie_progress
+                const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'scoobie_progress');
+                onSnapshot(colRef, (snapshot) => {
+                    snapshot.forEach((docSnap) => {
+                        const data = docSnap.data();
+                        if (data && data.playerKey) {
+                            playerDatabase[data.playerKey] = data;
+                        }
+                    });
+                    saveLocalDatabase();
+                    if (!document.getElementById('progressDbModal').classList.contains('hidden')) {
+                        renderProgressDatabase();
+                    }
+                }, (err) => {
+                    console.warn('Cloud sync fallback active:', err);
+                    updateDbStatusBadge(false);
+                });
+            } catch (err) {
+                console.warn('Using local persistent database:', err);
+                updateDbStatusBadge(false);
+            }
+        }
+
+        function updateDbStatusBadge(isCloud) {
+            const badge = document.getElementById('dbSyncStatusBadge');
+            if (!badge) return;
+            if (isCloud) {
+                badge.textContent = '☁️ Cloud + Local Synced';
+                badge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-400';
+            } else {
+                badge.textContent = '💾 Local Device Saved';
+                badge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-400';
+            }
+        }
+
+        async function persistCurrentProfileToDatabase(activityNote = '') {
+            const key = makePlayerKey(profile.name, profile.exactAge);
+            profile.playerKey = key;
+
+            const existing = playerDatabase[key] || {
+                playerKey: key,
+                name: profile.name,
+                exactAge: profile.exactAge,
+                avatarEmoji: profile.avatarEmoji,
+                avatarName: profile.avatarName,
+                stars: 0,
+                completed: {},
+                questStats: {},
+                history: []
+            };
+
+            const updatedRecord = {
+                ...existing,
+                playerKey: key,
+                name: profile.name,
+                exactAge: profile.exactAge,
+                ageTier: profile.ageTier,
+                avatarEmoji: profile.avatarEmoji,
+                avatarName: profile.avatarName,
+                stars: profile.stars,
+                completed: { ...profile.completed },
+                questStats: { ...profile.questStats },
+                lastPlayed: new Date().toISOString(),
+                history: activityNote
+                    ? [{ time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), date: new Date().toLocaleDateString(), note: activityNote }, ...(existing.history || [])].slice(0, 12)
+                    : (existing.history || [])
+            };
+
+            playerDatabase[key] = updatedRecord;
+            saveLocalDatabase();
+
+            if (cloudReady && db && currentUser) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'scoobie_progress', key);
+                    await setDoc(docRef, updatedRecord);
+                } catch (e) {
+                    console.warn('Firestore write skipped:', e);
+                }
+            }
+        }
+
+        window.deletePlayerRecord = async function(playerKey) {
+            delete playerDatabase[playerKey];
+            saveLocalDatabase();
+            if (cloudReady && db && currentUser) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'scoobie_progress', playerKey);
+                    await deleteDoc(docRef);
+                } catch (e) {}
+            }
+            renderProgressDatabase();
+        };
+
+        window.loadPlayerFromDatabase = function(playerKey) {
+            const rec = playerDatabase[playerKey];
+            if (!rec) return;
+
+            profile.playerKey = rec.playerKey;
+            profile.name = rec.name;
+            profile.exactAge = rec.exactAge;
+            profile.ageTier = mapAgeToTier(rec.exactAge);
+            profile.avatarEmoji = rec.avatarEmoji || '🍄';
+            profile.avatarName = rec.avatarName || 'Sprout';
+            profile.stars = rec.stars || 0;
+            profile.completed = { ...(rec.completed || {}) };
+            profile.questStats = { ...(rec.questStats || {}) };
+
+            document.getElementById('charNameInput').value = profile.name;
+            document.getElementById('childAgeInput').value = profile.exactAge;
+            onTypedAgeChange();
+
+            document.querySelectorAll('.hero-pill').forEach(btn => {
+                const isMatch = btn.dataset.hero === profile.avatarName;
+                btn.classList.toggle('border-[#FF7A22]', isMatch);
+                btn.classList.toggle('bg-[#ffedd5]', isMatch);
+                btn.classList.toggle('border-[#d6c39c]', !isMatch);
+                btn.classList.toggle('bg-white', !isMatch);
+            });
+
+            closeProgressDatabase();
+            updateHubHeader();
+            renderQuestGrid();
+
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('stageScreen').classList.add('hidden');
+            document.getElementById('hubScreen').classList.remove('hidden');
+
+            audio.start();
+            speak(`Welcome back ${profile.name}! Age ${profile.exactAge}!`);
+        };
+
+        window.openProgressDatabase = function() {
+            renderProgressDatabase();
+            document.getElementById('progressDbModal').classList.remove('hidden');
+            audio.playJump();
+        };
+
+        window.closeProgressDatabase = function() {
+            document.getElementById('progressDbModal').classList.add('hidden');
+        };
+
+        function renderProgressDatabase() {
+            const container = document.getElementById('progressDbList');
+            const records = Object.values(playerDatabase).sort((a, b) =>
+                (b.lastPlayed || '').localeCompare(a.lastPlayed || '')
+            );
+
+            document.getElementById('dbRecordCountLabel').textContent =
+                `${records.length} Saved Player${records.length === 1 ? '' : 's'}`;
+
+            if (records.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white border-4 border-[#d6c39c] rounded-3xl p-8 text-center">
+                        <div class="text-5xl mb-2">🌱</div>
+                        <div class="text-xl font-bold text-[#593116]">No Player Records Yet!</div>
+                        <p class="text-sm text-[#8B5A2B] mt-1">Enter a Character Name and Age and press GAME START to begin recording progress.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = records.map(rec => {
+                const doneCount = QUEST_CARDS.filter(q => rec.completed && rec.completed[q.id]).length;
+                const lastDate = rec.lastPlayed ? new Date(rec.lastPlayed).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Just now';
+
+                const questChips = QUEST_CARDS.map(q => {
+                    const isDone = rec.completed && rec.completed[q.id];
+                    const stat = (rec.questStats && rec.questStats[q.id]) || { stars: 0, attempts: 0 };
+                    return `
+                        <div class="px-2.5 py-1.5 rounded-xl border-2 ${isDone ? 'bg-emerald-50 border-emerald-400 text-emerald-900' : 'bg-amber-50/70 border-amber-300 text-amber-900'} flex items-center justify-between text-xs font-bold">
+                            <span>${q.icon} ${q.title}</span>
+                            <span>${isDone ? '✓ Done' : `${stat.stars || 0} ⭐`}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                const recentLogs = (rec.history || []).slice(0, 3).map(h =>
+                    `<span class="inline-block bg-slate-100 text-slate-700 text-[11px] font-semibold px-2.5 py-0.5 rounded-full mr-1.5 mb-1">🕒 ${h.time}: ${h.note}</span>`
+                ).join('');
+
+                return `
+                    <div class="bg-white border-4 border-[#6B3E1E] rounded-3xl p-4 sm:p-5 shadow-md">
+                        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b-2 border-[#f1e6cc]">
+                            <div class="flex items-center gap-3">
+                                <div class="w-14 h-14 rounded-2xl bg-amber-100 border-3 border-[#6B3E1E] flex items-center justify-center text-3xl">
+                                    ${rec.avatarEmoji || '🍄'}
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="text-xl font-bold text-[#3d2314]">${rec.name}</span>
+                                        <span class="px-2.5 py-0.5 rounded-full bg-[#44B533] text-white font-bold text-xs">Age ${rec.exactAge}</span>
+                                        <span class="px-2.5 py-0.5 rounded-full bg-amber-200 text-[#593116] font-bold text-xs">⭐ ${rec.stars || 0} Stars</span>
+                                        <span class="px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold text-xs">${doneCount}/${QUEST_CARDS.length} Quests Done</span>
+                                    </div>
+                                    <div class="text-xs font-semibold text-[#8B5A2B] mt-0.5">
+                                        Hero: ${rec.avatarName || 'Sprout'} • Last Played: ${lastDate}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button onclick="loadPlayerFromDatabase('${rec.playerKey}')"
+                                    class="game-btn px-4 py-2 rounded-xl bg-[#FF7A22] hover:bg-orange-500 border-3 border-[#593116] text-white font-bold text-sm shadow">
+                                    ▶ Load Player
+                                </button>
+                                <button onclick="deletePlayerRecord('${rec.playerKey}')" title="Delete Record"
+                                    class="game-btn px-3 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 border-2 border-rose-400 text-rose-700 font-bold text-sm">
+                                    🗑️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3">
+                            ${questChips}
+                        </div>
+
+                        ${recentLogs ? `<div class="mt-3 pt-2 border-t border-dashed border-[#e8d9b5]">${recentLogs}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.exportProgressCSV = function() {
+            const records = Object.values(playerDatabase);
+            const headers = ['Name', 'Age', 'Hero', 'TotalStars', 'CompletedQuests', 'LastPlayed'];
+            const rows = records.map(r => {
+                const doneList = QUEST_CARDS.filter(q => r.completed && r.completed[q.id]).map(q => q.title).join('; ');
+                return [
+                    `"${(r.name || '').replace(/"/g, '""')}"`,
+                    r.exactAge,
+                    `"${r.avatarName || 'Sprout'}"`,
+                    r.stars || 0,
+                    `"${doneList || 'None'}"`,
+                    `"${r.lastPlayed || ''}"`
+                ].join(',');
+            });
+            const csv = [headers.join(','), ...rows].join('\n');
+            downloadBlob(csv, 'scoobie_learning_progress.csv', 'text/csv');
+        };
+
+        window.exportProgressJSON = function() {
+            const json = JSON.stringify(Object.values(playerDatabase), null, 2);
+            downloadBlob(json, 'scoobie_learning_progress.json', 'application/json');
+        };
+
+        function downloadBlob(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        /**
+         * ============================================================================
+         * 1. ADVENTUROUS RETRO JRPG CHIPTUNE ENGINE & SOUND EFFECTS (WEB AUDIO API)
+         * ============================================================================
+         */
+        class AdventureAudioEngine {
+            constructor() {
+                this.ctx = null;
+                this.isPlaying = false;
+                this.isMuted = false;
+                this.step = 0;
+                this.timer = null;
+
+                // Upbeat heroic MapleStory-style JRPG melody
+                this.melody = [
+                    72, 0, 76, 79,  84, 0, 79, 76,
+                    77, 0, 81, 84,  79, 0, 76, 0,
+                    74, 0, 77, 81,  79, 0, 74, 71,
+                    72, 74, 76, 79, 84, 0, 0, 0,
+                    76, 0, 79, 84,  86, 0, 84, 81,
+                    79, 0, 76, 72,  74, 0, 77, 0,
+                    76, 74, 72, 74, 76, 0, 79, 0,
+                    81, 0, 83, 0,   84, 0, 0, 0
+                ];
+                this.bass = [
+                    48, 0, 55, 0,   48, 0, 55, 0,
+                    53, 0, 60, 0,   48, 0, 55, 0,
+                    50, 0, 57, 0,   55, 0, 47, 0,
+                    48, 0, 55, 0,   48, 52, 55, 0,
+                    48, 0, 55, 0,   57, 0, 64, 0,
+                    53, 0, 60, 0,   50, 0, 57, 0,
+                    48, 0, 52, 0,   55, 0, 59, 0,
+                    53, 0, 55, 0,   48, 0, 0, 0
+                ];
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioCtx();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            start() {
+                this.init();
+                if (this.isPlaying) return;
+                this.isPlaying = true;
+                this.timer = setInterval(() => {
+                    if (this.isMuted || !this.isPlaying) return;
+                    this.tick(this.step);
+                    this.step = (this.step + 1) % this.melody.length;
+                }, 115);
+            }
+
+            midiToFreq(m) {
+                return 440 * Math.pow(2, (m - 69) / 12);
+            }
+
+            tick(i) {
+                if (!this.ctx) return;
+                const now = this.ctx.currentTime;
+                const m = this.melody[i];
+                if (m > 0) {
+                    const osc = this.ctx.createOscillator();
+                    const g = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(this.midiToFreq(m), now);
+                    g.gain.setValueAtTime(0.001, now);
+                    g.gain.linearRampToValueAtTime(0.065, now + 0.02);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+                    osc.connect(g);
+                    g.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.23);
+                }
+                const b = this.bass[i];
+                if (b > 0) {
+                    const osc = this.ctx.createOscillator();
+                    const g = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(this.midiToFreq(b), now);
+                    g.gain.setValueAtTime(0.001, now);
+                    g.gain.linearRampToValueAtTime(0.075, now + 0.015);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.connect(g);
+                    g.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.21);
+                }
+            }
+
+            toggleMute() {
+                this.init();
+                this.isMuted = !this.isMuted;
+                if (!this.isPlaying && !this.isMuted) this.start();
+                return !this.isMuted;
+            }
+
+            playJump() {
+                this.init();
+                if (this.isMuted || !this.ctx) return;
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const g = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(260, now);
+                osc.frequency.exponentialRampToValueAtTime(620, now + 0.17);
+                g.gain.setValueAtTime(0.14, now);
+                g.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+                osc.connect(g);
+                g.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.19);
+            }
+
+            playBoing() {
+                this.init();
+                if (this.isMuted || !this.ctx) return;
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const g = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(190, now);
+                osc.frequency.exponentialRampToValueAtTime(860, now + 0.26);
+                g.gain.setValueAtTime(0.16, now);
+                g.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+                osc.connect(g);
+                g.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.29);
+            }
+
+            playWin() {
+                this.init();
+                if (this.isMuted || !this.ctx) return;
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                    const now = this.ctx.currentTime + idx * 0.085;
+                    const osc = this.ctx.createOscillator();
+                    const g = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now);
+                    g.gain.setValueAtTime(0.15, now);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.34);
+                    osc.connect(g);
+                    g.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                });
+            }
+
+            playGentleBoop() {
+                this.init();
+                if (this.isMuted || !this.ctx) return;
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const g = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(310, now);
+                osc.frequency.linearRampToValueAtTime(210, now + 0.22);
+                g.gain.setValueAtTime(0.12, now);
+                g.gain.exponentialRampToValueAtTime(0.001, now + 0.23);
+                osc.connect(g);
+                g.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.24);
+            }
+
+            playCueSound(soundId) {
+                this.init();
+                if (!this.ctx) return;
+                const now = this.ctx.currentTime;
+                if (soundId === 'bell') {
+                    [880, 1318.5].forEach(f => {
+                        const osc = this.ctx.createOscillator();
+                        const g = this.ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(f, now);
+                        g.gain.setValueAtTime(0.18, now);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+                        osc.connect(g);
+                        g.connect(this.ctx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.66);
+                    });
+                } else if (soundId === 'drum') {
+                    [0, 0.22].forEach(off => {
+                        const osc = this.ctx.createOscillator();
+                        const g = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(150, now + off);
+                        osc.frequency.exponentialRampToValueAtTime(48, now + off + 0.18);
+                        g.gain.setValueAtTime(0.26, now + off);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + off + 0.19);
+                        osc.connect(g);
+                        g.connect(this.ctx.destination);
+                        osc.start(now + off);
+                        osc.stop(now + off + 0.2);
+                    });
+                } else if (soundId === 'bird') {
+                    [1150, 1480, 1220, 1680].forEach((f, idx) => {
+                        const osc = this.ctx.createOscillator();
+                        const g = this.ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(f, now + idx * 0.1);
+                        g.gain.setValueAtTime(0.15, now + idx * 0.1);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.08);
+                        osc.connect(g);
+                        g.connect(this.ctx.destination);
+                        osc.start(now + idx * 0.1);
+                        osc.stop(now + idx * 0.1 + 0.09);
+                    });
+                } else if (soundId === 'train') {
+                    [0, 0.3].forEach(off => {
+                        const osc = this.ctx.createOscillator();
+                        const g = this.ctx.createGain();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(370, now + off);
+                        g.gain.setValueAtTime(0.09, now + off);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + off + 0.24);
+                        osc.connect(g);
+                        g.connect(this.ctx.destination);
+                        osc.start(now + off);
+                        osc.stop(now + off + 0.25);
+                    });
+                } else if (soundId === 'rain') {
+                    [620, 740, 580, 810, 690].forEach((f, idx) => {
+                        const osc = this.ctx.createOscillator();
+                        const g = this.ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(f, now + idx * 0.08);
+                        g.gain.setValueAtTime(0.1, now + idx * 0.08);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.07);
+                        osc.connect(g);
+                        g.connect(this.ctx.destination);
+                        osc.start(now + idx * 0.08);
+                        osc.stop(now + idx * 0.08 + 0.08);
+                    });
+                }
+            }
+        }
+
+        const audio = new AdventureAudioEngine();
+
+        function speak(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.rate = 0.86;
+            utter.pitch = 1.18;
+            utter.volume = 1.0;
+            const voices = window.speechSynthesis.getVoices();
+            const v = voices.find(x => x.lang.startsWith('en') && (x.name.includes('Female') || x.name.includes('Samantha')))
+                || voices.find(x => x.lang.startsWith('en'));
+            if (v) utter.voice = v;
+            window.speechSynthesis.speak(utter);
+        }
+
+        /**
+         * ============================================================================
+         * 2. PROFILE STATE, TYPED AGE MAPPING & SCREEN 1 / SCREEN 2 TRANSITIONS
+         * ============================================================================
+         */
+        const TIER_DETAILS = {
+            '2-3': {
+                badge: '🐣 Tier 1: Sprout Basics',
+                hint: 'Zero Reading • Shapes, Colours & Animal Sounds'
+            },
+            '4-5': {
+                badge: '🦊 Tier 2: Little Explorer',
+                hint: 'Counting 1–6, Beginning Phonics & Letter Tracing'
+            },
+            '6-7': {
+                badge: '🦁 Tier 3: Junior Hero',
+                hint: 'Simple Math, Colour Mixing & First Words'
+            }
+        };
+
+        function mapAgeToTier(ageNum) {
+            const n = parseInt(ageNum, 10) || 3;
+            if (n <= 3) return '2-3';
+            if (n <= 5) return '4-5';
+            return '6-7';
+        }
+
+        const profile = {
+            playerKey: 'scoobie_age_3',
+            name: 'Scoobie',
+            exactAge: 3,
+            ageTier: '2-3',
+            avatarEmoji: '🍄',
+            avatarName: 'Sprout',
+            stars: 0,
+            completed: {},
+            questStats: {}
+        };
+
+        function loadSavedProfile() {
+            loadLocalDatabase();
+            const records = Object.values(playerDatabase).sort((a, b) =>
+                (b.lastPlayed || '').localeCompare(a.lastPlayed || '')
+            );
+            if (records.length > 0) {
+                const latest = records[0];
+                profile.playerKey = latest.playerKey;
+                profile.name = latest.name || 'Scoobie';
+                profile.exactAge = latest.exactAge || 3;
+                profile.ageTier = mapAgeToTier(profile.exactAge);
+                profile.avatarEmoji = latest.avatarEmoji || '🍄';
+                profile.avatarName = latest.avatarName || 'Sprout';
+                profile.stars = latest.stars || 0;
+                profile.completed = { ...(latest.completed || {}) };
+                profile.questStats = { ...(latest.questStats || {}) };
+            }
+            document.getElementById('charNameInput').value = profile.name;
+            document.getElementById('childAgeInput').value = profile.exactAge;
+            onTypedAgeChange();
+        }
+
+        function saveProfile(activityNote = '') {
+            persistCurrentProfileToDatabase(activityNote);
+        }
+
+        window.onTypedAgeChange = function() {
+            const rawVal = parseInt(document.getElementById('childAgeInput').value, 10);
+            const validAge = isNaN(rawVal) ? 3 : Math.max(1, Math.min(15, rawVal));
+            profile.exactAge = validAge;
+            profile.ageTier = mapAgeToTier(validAge);
+
+            const info = TIER_DETAILS[profile.ageTier];
+            document.getElementById('ageTierBadgeText').textContent = `Age ${validAge} • ${info.badge}`;
+            document.getElementById('ageHintCaption').textContent = info.hint;
+        };
+
+        window.selectHeroSprite = function(emoji, name, btn) {
+            profile.avatarEmoji = emoji;
+            profile.avatarName = name;
+            document.querySelectorAll('.hero-pill').forEach(p => {
+                p.classList.remove('border-[#FF7A22]', 'bg-[#ffedd5]');
+                p.classList.add('border-[#d6c39c]', 'bg-white');
+            });
+            btn.classList.remove('border-[#d6c39c]', 'bg-white');
+            btn.classList.add('border-[#FF7A22]', 'bg-[#ffedd5]');
+            audio.playJump();
+        };
+
+        window.handleGameStart = function() {
+            const enteredName = document.getElementById('charNameInput').value.trim() || 'Scoobie';
+            const rawAge = parseInt(document.getElementById('childAgeInput').value, 10);
+            const enteredAge = isNaN(rawAge) ? 3 : Math.max(1, Math.min(15, rawAge));
+
+            const key = makePlayerKey(enteredName, enteredAge);
+            const existing = playerDatabase[key];
+
+            if (existing) {
+                // Restore returning child's progress automatically!
+                profile.playerKey = key;
+                profile.name = existing.name;
+                profile.exactAge = existing.exactAge;
+                profile.ageTier = mapAgeToTier(existing.exactAge);
+                profile.stars = existing.stars || 0;
+                profile.completed = { ...(existing.completed || {}) };
+                profile.questStats = { ...(existing.questStats || {}) };
+            } else {
+                // Brand new player profile
+                profile.playerKey = key;
+                profile.name = enteredName;
+                profile.exactAge = enteredAge;
+                profile.ageTier = mapAgeToTier(enteredAge);
+                profile.stars = 0;
+                profile.completed = {};
+                profile.questStats = {};
+            }
+
+            saveProfile('Started Learning Adventure');
+
+            audio.start();
+            updateHubHeader();
+            renderQuestGrid();
+
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('hubScreen').classList.remove('hidden');
+
+            speak(`Welcome ${profile.name}! Age ${profile.exactAge}! Let's choose a quest!`);
+        };
+
+        window.switchPlayerScreen = function() {
+            document.getElementById('hubScreen').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            audio.playJump();
+        };
+
+        function updateHubHeader() {
+            document.getElementById('hubAvatarBadge').textContent = profile.avatarEmoji;
+            document.getElementById('hubNameLabel').textContent = profile.name;
+            document.getElementById('hubAgeBadge').textContent = `Age ${profile.exactAge}`;
+            document.getElementById('hubStarsLabel').textContent = profile.stars;
+        }
+
+        window.toggleMusic = function() {
+            const active = audio.toggleMute();
+            const icon = active ? '🎵' : '🔇';
+            document.getElementById('loginMusicIcon').textContent = icon;
+            document.getElementById('hubMusicIcon').textContent = icon;
+            document.getElementById('stageMusicIcon').textContent = icon;
+        };
+
+        /**
+         * ============================================================================
+         * 3. SEVEN QUEST DEFINITIONS WITH AGE-ADAPTIVE CURRICULUM (2-3, 4-5, 6-7)
+         * ============================================================================
+         */
+        const QUEST_CARDS = [
+            { id: 'colours', title: 'COLOURS', icon: '🎨', cardBg: '#fcebf1', dotColor: '#ec4899', skyTop: '#38bdf8', skyBot: '#fef08a', groundColor: '#44B533', type: 'platform-orb' },
+            { id: 'counting', title: 'COUNTING', icon: '🔢', cardBg: '#e8f4fc', dotColor: '#0ea5e9', skyTop: '#0284c7', skyBot: '#dcfce7', groundColor: '#22c55e', type: 'platform-orb' },
+            { id: 'shapes', title: 'SHAPES', icon: '⭐', cardBg: '#f4ebfc', dotColor: '#9333ea', skyTop: '#38bdf8', skyBot: '#f3e8ff', groundColor: '#4ade80', type: 'platform-orb' },
+            { id: 'animals', title: 'ANIMALS', icon: '🦁', cardBg: '#fcf8e3', dotColor: '#f59e0b', skyTop: '#38bdf8', skyBot: '#fef9c3', groundColor: '#65b832', type: 'platform-orb' },
+            { id: 'tracing', title: 'TRACING', icon: '✏️', cardBg: '#fcebf1', dotColor: '#f43f5e', skyTop: '#6366f1', skyBot: '#e0e7ff', groundColor: '#34d399', type: 'tracing-gate' },
+            { id: 'listening', title: 'LISTENING', icon: '🔔', cardBg: '#e6f9f0', dotColor: '#10b981', skyTop: '#0ea5e9', skyBot: '#d1fae5', groundColor: '#10b981', type: 'platform-orb' },
+            { id: 'speaking', title: 'SPEAKING', icon: '🦜', cardBg: '#e8f0fc', dotColor: '#3b82f6', skyTop: '#0284c7', skyBot: '#fef3c7', groundColor: '#4ade80', type: 'speaking-gate' }
+        ];
+
+        // Fisher-Yates shuffle helper for true randomization
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function getAgeRoundsForQuest(questId, ageTier) {
+            let baseRounds = [];
+            if (questId === 'colours') {
+                if (ageTier === '2-3') {
+                    baseRounds = [
+                        { voice: 'Jump to the RED balloon! Red like a strawberry!', clueHtml: '<span class="inline-block w-10 h-10 rounded-full bg-red-500 border-3 border-white shadow"></span>', targetId: 'red', choices: [{ id: 'red', label: '🍓', bg: '#ef4444', speakName: 'Red!' }, { id: 'blue', label: '🐳', bg: '#3b82f6', speakName: 'Blue' }, { id: 'yellow', label: '🍌', bg: '#facc15', speakName: 'Yellow' }] },
+                        { voice: 'Jump to the BLUE balloon! Blue like a whale!', clueHtml: '<span class="inline-block w-10 h-10 rounded-full bg-blue-500 border-3 border-white shadow"></span>', targetId: 'blue', choices: [{ id: 'yellow', label: '🍌', bg: '#facc15', speakName: 'Yellow' }, { id: 'blue', label: '🐳', bg: '#3b82f6', speakName: 'Blue!' }, { id: 'red', label: '🍎', bg: '#ef4444', speakName: 'Red' }] },
+                        { voice: 'Jump to the YELLOW balloon! Yellow like a banana!', clueHtml: '<span class="inline-block w-10 h-10 rounded-full bg-yellow-400 border-3 border-white shadow"></span>', targetId: 'yellow', choices: [{ id: 'yellow', label: '🍌', bg: '#facc15', speakName: 'Yellow!' }, { id: 'red', label: '🍓', bg: '#ef4444', speakName: 'Red' }, { id: 'blue', label: '🐳', bg: '#3b82f6', speakName: 'Blue' }] }
+                    ];
+                } else if (ageTier === '4-5') {
+                    baseRounds = [
+                        { voice: 'Jump to the GREEN frog! Green!', clueHtml: '<span class="inline-block w-10 h-10 rounded-full bg-green-500 border-3 border-white shadow"></span>', targetId: 'green', choices: [{ id: 'green', label: '🐸', bg: '#22c55e', speakName: 'Green!' }, { id: 'orange', label: '🍊', bg: '#f97316', speakName: 'Orange' }, { id: 'purple', label: '🍇', bg: '#a855f7', speakName: 'Purple' }] },
+                        { voice: 'Jump to the ORANGE carrot! Orange!', clueHtml: '<span class="inline-block w-10 h-10 rounded-full bg-orange-500 border-3 border-white shadow"></span>', targetId: 'orange', choices: [{ id: 'pink', label: '🌸', bg: '#ec4899', speakName: 'Pink' }, { id: 'orange', label: '🥕', bg: '#f97316', speakName: 'Orange!' }, { id: 'green', label: '🐢', bg: '#22c55e', speakName: 'Green' }] },
+                        { voice: 'Jump to the PURPLE grapes! Purple!', clueHtml: '<span class="inline-block w-10 h-10 rounded-full bg-purple-500 border-3 border-white shadow"></span>', targetId: 'purple', choices: [{ id: 'purple', label: '🍇', bg: '#a855f7', speakName: 'Purple!' }, { id: 'pink', label: '🦩', bg: '#ec4899', speakName: 'Pink' }, { id: 'green', label: '🐸', bg: '#22c55e', speakName: 'Green' }] }
+                    ];
+                } else {
+                    baseRounds = [
+                        { voice: 'Red plus Yellow makes what colour? Jump to ORANGE!', clueHtml: '<span>🔴 + 🟡 = ?</span>', targetId: 'orange', choices: [{ id: 'orange', label: '🟠', bg: '#f97316', speakName: 'Orange!' }, { id: 'green', label: '🟢', bg: '#22c55e', speakName: 'Green' }, { id: 'purple', label: '🟣', bg: '#a855f7', speakName: 'Purple' }] },
+                        { voice: 'Blue plus Yellow makes what colour? Jump to GREEN!', clueHtml: '<span>🔵 + 🟡 = ?</span>', targetId: 'green', choices: [{ id: 'purple', label: '🟣', bg: '#a855f7', speakName: 'Purple' }, { id: 'green', label: '🟢', bg: '#22c55e', speakName: 'Green!' }, { id: 'orange', label: '🟠', bg: '#f97316', speakName: 'Orange' }] },
+                        { voice: 'Red plus Blue makes what colour? Jump to PURPLE!', clueHtml: '<span>🔴 + 🔵 = ?</span>', targetId: 'purple', choices: [{ id: 'green', label: '🟢', bg: '#22c55e', speakName: 'Green' }, { id: 'orange', label: '🟠', bg: '#f97316', speakName: 'Orange' }, { id: 'purple', label: '🟣', bg: '#a855f7', speakName: 'Purple!' }] }
+                    ];
+                }
+            } else if (questId === 'counting') {
+                if (ageTier === '2-3') {
+                    baseRounds = [
+                        { voice: 'Jump to ONE apple! 1!', clueHtml: '<span>1 🍎</span>', targetId: '1', choices: [{ id: '1', label: '🍎', bg: '#ffffff', speakName: 'One!' }, { id: '2', label: '🍎🍎', bg: '#ffffff', speakName: 'Two' }, { id: '3', label: '🍎🍎🍎', bg: '#ffffff', speakName: 'Three' }] },
+                        { voice: 'Jump to TWO stars! 1, 2!', clueHtml: '<span>2 ⭐</span>', targetId: '2', choices: [{ id: '1', label: '⭐', bg: '#ffffff', speakName: 'One' }, { id: '2', label: '⭐⭐', bg: '#ffffff', speakName: 'Two!' }, { id: '3', label: '⭐⭐⭐', bg: '#ffffff', speakName: 'Three' }] },
+                        { voice: 'Jump to THREE bunnies! 1, 2, 3!', clueHtml: '<span>3 🐰</span>', targetId: '3', choices: [{ id: '2', label: '🐰🐰', bg: '#ffffff', speakName: 'Two' }, { id: '3', label: '🐰🐰🐰', bg: '#ffffff', speakName: 'Three!' }, { id: '1', label: '🐰', bg: '#ffffff', speakName: 'One' }] }
+                    ];
+                } else if (ageTier === '4-5') {
+                    baseRounds = [
+                        { voice: 'Count 4 apples! Jump to 4!', clueHtml: '<span>4 🍎</span>', targetId: '4', choices: [{ id: '3', label: '3 🍎', bg: '#ffffff', speakName: 'Three' }, { id: '4', label: '4 🍎', bg: '#ffffff', speakName: 'Four!' }, { id: '5', label: '5 🍎', bg: '#ffffff', speakName: 'Five' }] },
+                        { voice: 'Count 5 stars! Jump to 5!', clueHtml: '<span>5 ⭐</span>', targetId: '5', choices: [{ id: '5', label: '5 ⭐', bg: '#ffffff', speakName: 'Five!' }, { id: '4', label: '4 ⭐', bg: '#ffffff', speakName: 'Four' }, { id: '6', label: '6 ⭐', bg: '#ffffff', speakName: 'Six' }] },
+                        { voice: 'Count 6 bunnies! Jump to 6!', clueHtml: '<span>6 🐰</span>', targetId: '6', choices: [{ id: '4', label: '4 🐰', bg: '#ffffff', speakName: 'Four' }, { id: '5', label: '5 🐰', bg: '#ffffff', speakName: 'Five' }, { id: '6', label: '6 🐰', bg: '#ffffff', speakName: 'Six!' }] }
+                    ];
+                } else {
+                    baseRounds = [
+                        { voice: '2 apples plus 1 apple equals how many? Jump to 3!', clueHtml: '<span>🍎🍎 + 🍎 = ?</span>', targetId: '3', choices: [{ id: '2', label: '2', bg: '#ffffff', speakName: 'Two' }, { id: '3', label: '3', bg: '#ffffff', speakName: 'Three!' }, { id: '4', label: '4', bg: '#ffffff', speakName: 'Four' }] },
+                        { voice: '3 stars plus 2 stars equals how many? Jump to 5!', clueHtml: '<span>⭐⭐⭐ + ⭐⭐ = ?</span>', targetId: '5', choices: [{ id: '5', label: '5', bg: '#ffffff', speakName: 'Five!' }, { id: '4', label: '4', bg: '#ffffff', speakName: 'Four' }, { id: '6', label: '6', bg: '#ffffff', speakName: 'Six' }] },
+                        { voice: '4 apples minus 2 apples equals how many? Jump to 2!', clueHtml: '<span>4 🍎 − 2 🍎 = ?</span>', targetId: '2', choices: [{ id: '1', label: '1', bg: '#ffffff', speakName: 'One' }, { id: '3', label: '3', bg: '#ffffff', speakName: 'Three' }, { id: '2', label: '2', bg: '#ffffff', speakName: 'Two!' }] }
+                    ];
+                }
+            } else if (questId === 'shapes') {
+                if (ageTier === '2-3') {
+                    baseRounds = [
+                        { voice: 'Jump to the round CIRCLE!', clueHtml: '<span class="text-red-500">●</span>', targetId: 'circle', choices: [{ id: 'circle', label: '🔴', bg: '#ffffff', speakName: 'Circle!' }, { id: 'square', label: '🟦', bg: '#ffffff', speakName: 'Square' }, { id: 'triangle', label: '🔺', bg: '#ffffff', speakName: 'Triangle' }] },
+                        { voice: 'Jump to the blue SQUARE!', clueHtml: '<span class="text-blue-500">■</span>', targetId: 'square', choices: [{ id: 'triangle', label: '🔺', bg: '#ffffff', speakName: 'Triangle' }, { id: 'square', label: '🟦', bg: '#ffffff', speakName: 'Square!' }, { id: 'circle', label: '🔴', bg: '#ffffff', speakName: 'Circle' }] },
+                        { voice: 'Jump to the red TRIANGLE!', clueHtml: '<span class="text-red-500">▲</span>', targetId: 'triangle', choices: [{ id: 'circle', label: '🔴', bg: '#ffffff', speakName: 'Circle' }, { id: 'square', label: '🟦', bg: '#ffffff', speakName: 'Square' }, { id: 'triangle', label: '🔺', bg: '#ffffff', speakName: 'Triangle!' }] }
+                    ];
+                } else if (ageTier === '4-5') {
+                    baseRounds = [
+                        { voice: 'Jump to the shiny STAR!', clueHtml: '<span>⭐</span>', targetId: 'star', choices: [{ id: 'star', label: '⭐', bg: '#ffffff', speakName: 'Star!' }, { id: 'heart', label: '❤️', bg: '#ffffff', speakName: 'Heart' }, { id: 'diamond', label: '🔷', bg: '#ffffff', speakName: 'Diamond' }] },
+                        { voice: 'Jump to the red HEART!', clueHtml: '<span>❤️</span>', targetId: 'heart', choices: [{ id: 'diamond', label: '🔷', bg: '#ffffff', speakName: 'Diamond' }, { id: 'heart', label: '❤️', bg: '#ffffff', speakName: 'Heart!' }, { id: 'star', label: '⭐', bg: '#ffffff', speakName: 'Star' }] },
+                        { voice: 'Jump to the blue DIAMOND!', clueHtml: '<span>🔷</span>', targetId: 'diamond', choices: [{ id: 'heart', label: '❤️', bg: '#ffffff', speakName: 'Heart' }, { id: 'star', label: '⭐', bg: '#ffffff', speakName: 'Star' }, { id: 'diamond', label: '🔷', bg: '#ffffff', speakName: 'Diamond!' }] }
+                    ];
+                } else {
+                    baseRounds = [
+                        { voice: 'Jump to the CRESCENT moon!', clueHtml: '<span>🌙</span>', targetId: 'crescent', choices: [{ id: 'crescent', label: '🌙', bg: '#ffffff', speakName: 'Crescent!' }, { id: 'star', label: '⭐', bg: '#ffffff', speakName: 'Star' }, { id: 'square', label: '🟦', bg: '#ffffff', speakName: 'Square' }] },
+                        { voice: 'Jump to the six-sided HEXAGON!', clueHtml: '<span>⬡</span>', targetId: 'hexagon', choices: [{ id: 'circle', label: '🔴', bg: '#ffffff', speakName: 'Circle' }, { id: 'hexagon', label: '⬡', bg: '#ffffff', speakName: 'Hexagon!' }, { id: 'triangle', label: '🔺', bg: '#ffffff', speakName: 'Triangle' }] },
+                        { voice: 'Jump to the egg-shaped OVAL!', clueHtml: '<span>🥚</span>', targetId: 'oval', choices: [{ id: 'square', label: '🟦', bg: '#ffffff', speakName: 'Square' }, { id: 'diamond', label: '🔷', bg: '#ffffff', speakName: 'Diamond' }, { id: 'oval', label: '🥚', bg: '#ffffff', speakName: 'Oval!' }] }
+                    ];
+                }
+            } else if (questId === 'animals') {
+                if (ageTier === '2-3') {
+                    baseRounds = [
+                        { voice: 'Woof woof! Jump to the DOG!', clueHtml: '<span>🐶</span>', targetId: 'dog', choices: [{ id: 'dog', label: '🐶', bg: '#ffffff', speakName: 'Woof! Dog!' }, { id: 'cat', label: '🐱', bg: '#ffffff', speakName: 'Meow! Cat' }, { id: 'duck', label: '🦆', bg: '#ffffff', speakName: 'Quack! Duck' }] },
+                        { voice: 'Meow meow! Jump to the CAT!', clueHtml: '<span>🐱</span>', targetId: 'cat', choices: [{ id: 'cow', label: '🐮', bg: '#ffffff', speakName: 'Moo! Cow' }, { id: 'cat', label: '🐱', bg: '#ffffff', speakName: 'Meow! Cat!' }, { id: 'duck', label: '🦆', bg: '#ffffff', speakName: 'Quack! Duck' }] },
+                        { voice: 'Moo! Jump to the COW!', clueHtml: '<span>🐮</span>', targetId: 'cow', choices: [{ id: 'duck', label: '🦆', bg: '#ffffff', speakName: 'Quack! Duck' }, { id: 'dog', label: '🐶', bg: '#ffffff', speakName: 'Woof! Dog' }, { id: 'cow', label: '🐮', bg: '#ffffff', speakName: 'Moo! Cow!' }] }
+                    ];
+                } else if (ageTier === '4-5') {
+                    baseRounds = [
+                        { voice: 'Roar! Which animal lives in the jungle? Jump to the LION!', clueHtml: '<span>🌴 🦁</span>', targetId: 'lion', choices: [{ id: 'lion', label: '🦁', bg: '#ffffff', speakName: 'Roar! Lion!' }, { id: 'whale', label: '🐳', bg: '#ffffff', speakName: 'Whale' }, { id: 'penguin', label: '🐧', bg: '#ffffff', speakName: 'Penguin' }] },
+                        { voice: 'Splash! Which animal swims in the ocean? Jump to the WHALE!', clueHtml: '<span>🌊 🐳</span>', targetId: 'whale', choices: [{ id: 'monkey', label: '🐵', bg: '#ffffff', speakName: 'Monkey' }, { id: 'whale', label: '🐳', bg: '#ffffff', speakName: 'Whale!' }, { id: 'lion', label: '🦁', bg: '#ffffff', speakName: 'Lion' }] },
+                        { voice: 'Brrr! Which bird loves the snow? Jump to the PENGUIN!', clueHtml: '<span>❄️ 🐧</span>', targetId: 'penguin', choices: [{ id: 'lion', label: '🦁', bg: '#ffffff', speakName: 'Lion' }, { id: 'whale', label: '🐳', bg: '#ffffff', speakName: 'Whale' }, { id: 'penguin', label: '🐧', bg: '#ffffff', speakName: 'Penguin!' }] }
+                    ];
+                } else {
+                    baseRounds = [
+                        { voice: 'Which animal starts with the letter L? Lll, Lion!', clueHtml: '<span>L = ? 🦁</span>', targetId: 'lion', choices: [{ id: 'lion', label: '🦁', bg: '#ffffff', speakName: 'L is for Lion!' }, { id: 'zebra', label: '🦓', bg: '#ffffff', speakName: 'Zebra' }, { id: 'tiger', label: '🐯', bg: '#ffffff', speakName: 'Tiger' }] },
+                        { voice: 'Which animal starts with the letter Z? Zzz, Zebra!', clueHtml: '<span>Z = ? 🦓</span>', targetId: 'zebra', choices: [{ id: 'frog', label: '🐸', bg: '#ffffff', speakName: 'Frog' }, { id: 'zebra', label: '🦓', bg: '#ffffff', speakName: 'Z is for Zebra!' }, { id: 'lion', label: '🦁', bg: '#ffffff', speakName: 'Lion' }] },
+                        { voice: 'Which animal starts with the letter F? Fff, Frog!', clueHtml: '<span>F = ? 🐸</span>', targetId: 'frog', choices: [{ id: 'tiger', label: '🐯', bg: '#ffffff', speakName: 'Tiger' }, { id: 'zebra', label: '🦓', bg: '#ffffff', speakName: 'Zebra' }, { id: 'frog', label: '🐸', bg: '#ffffff', speakName: 'F is for Frog!' }] }
+                    ];
+                }
+            } else if (questId === 'tracing') {
+                if (ageTier === '2-3') {
+                    baseRounds = [
+                        { voice: 'Walk to the magic rune gate and trace the straight line!', clueHtml: '<span>⬇️ ✏️</span>', glyphKey: 'line' },
+                        { voice: 'Walk to the magic rune gate and trace the wavy river!', clueHtml: '<span>〰️ ✏️</span>', glyphKey: 'wave' },
+                        { voice: 'Walk to the magic rune gate and trace the round circle!', clueHtml: '<span>⭕ ✏️</span>', glyphKey: 'circle' }
+                    ];
+                } else if (ageTier === '4-5') {
+                    baseRounds = [
+                        { voice: 'Walk to the magic rune gate and trace the letter A!', clueHtml: '<span>🍎 A</span>', glyphKey: 'A' },
+                        { voice: 'Walk to the magic rune gate and trace the letter B!', clueHtml: '<span>🐻 B</span>', glyphKey: 'B' },
+                        { voice: 'Walk to the magic rune gate and trace the letter C!', clueHtml: '<span>🐱 C</span>', glyphKey: 'C' }
+                    ];
+                } else {
+                    baseRounds = [
+                        { voice: 'Walk to the magic rune gate and trace the word CAT!', clueHtml: '<span>🐱 CAT</span>', glyphKey: 'CAT' },
+                        { voice: 'Walk to the magic rune gate and trace the word SUN!', clueHtml: '<span>☀️ SUN</span>', glyphKey: 'SUN' },
+                        { voice: 'Walk to the magic rune gate and trace the letter A!', clueHtml: '<span>🍎 A</span>', glyphKey: 'A' }
+                    ];
+                }
+            } else if (questId === 'listening') {
+                baseRounds = [
+                    { voice: 'Listen to the chime! Jump to the golden BELL!', soundId: 'bell', clueHtml: '<span>🎶 🔔</span>', targetId: 'bell', choices: [{ id: 'bell', label: '🔔', bg: '#ffffff', speakName: 'Ding dong! Bell!' }, { id: 'car', label: '🚗', bg: '#ffffff', speakName: 'Car' }, { id: 'apple', label: '🍎', bg: '#ffffff', speakName: 'Apple' }] },
+                    { voice: 'Listen to the chirp! Jump to the little BIRD!', soundId: 'bird', clueHtml: '<span>🎶 🐦</span>', targetId: 'bird', choices: [{ id: 'fish', label: '🐟', bg: '#ffffff', speakName: 'Fish' }, { id: 'bird', label: '🐦', bg: '#ffffff', speakName: 'Tweet tweet! Bird!' }, { id: 'bear', label: '🐻', bg: '#ffffff', speakName: 'Bear' }] },
+                    { voice: 'Listen to the beat! Jump to the DRUM!', soundId: 'drum', clueHtml: '<span>🎶 🥁</span>', targetId: 'drum', choices: [{ id: 'drum', label: '🥁', bg: '#ffffff', speakName: 'Boom boom! Drum!' }, { id: 'train', label: '🚂', bg: '#ffffff', speakName: 'Train' }, { id: 'rain', label: '🌧️', bg: '#ffffff', speakName: 'Rain' }] }
+                ];
+            } else {
+                // Speaking Quest
+                if (ageTier === '2-3') {
+                    baseRounds = [
+                        { voice: 'Walk to the friendly parrot and say: Moo!', clueHtml: '<span>🦜 🐮</span>', emoji: '🐮', sayText: 'Moo!' },
+                        { voice: 'Walk to the friendly parrot and say: Red!', clueHtml: '<span>🦜 🍓</span>', emoji: '🍓', sayText: 'Red!' },
+                        { voice: 'Walk to the friendly parrot and say: Apple!', clueHtml: '<span>🦜 🍎</span>', emoji: '🍎', sayText: 'Apple!' }
+                    ];
+                } else if (ageTier === '4-5') {
+                    baseRounds = [
+                        { voice: 'Walk to the friendly parrot and say: Apple!', clueHtml: '<span>🦜 🍎</span>', emoji: '🍎', sayText: 'Apple' },
+                        { voice: 'Walk to the friendly parrot and say: Rainbow!', clueHtml: '<span>🦜 🌈</span>', emoji: '🌈', sayText: 'Rainbow' },
+                        { voice: `Walk to the friendly parrot and say: Hello ${profile.name}!`, clueHtml: `<span>🦜 👋</span>`, emoji: '👋', sayText: `Hello ${profile.name}` }
+                    ];
+                } else {
+                    baseRounds = [
+                        { voice: `Walk to the friendly parrot and say: Hello ${profile.name}!`, clueHtml: `<span>🦜 👋</span>`, emoji: '👋', sayText: `Hello ${profile.name}` },
+                        { voice: 'Walk to the friendly parrot and say: I love learning!', clueHtml: '<span>🦜 ⭐</span>', emoji: '⭐', sayText: 'I love learning' },
+                        { voice: 'Walk to the friendly parrot and say: Adventure!', clueHtml: '<span>🦜 ⚔️</span>', emoji: '⚔️', sayText: 'Adventure' }
+                    ];
+                }
+            }
+
+            // Randomize question order AND shuffle choices inside every round!
+            const shuffledRounds = shuffleArray(baseRounds).map(r => {
+                if (r.choices) {
+                    return { ...r, choices: shuffleArray(r.choices) };
+                }
+                return { ...r };
+            });
+
+            // Build enough progressive checkpoints so player can spin power-ups up to ~100 HP!
+            const extendedRounds = [...shuffledRounds];
+            while (extendedRounds.length < 7) {
+                const extraPool = shuffleArray(baseRounds).map(r =>
+                    r.choices ? { ...r, choices: shuffleArray(r.choices) } : { ...r }
+                );
+                extendedRounds.push(...extraPool);
+            }
+            return extendedRounds;
+        }
+
+        function renderQuestGrid() {
+            const grid = document.getElementById('questGrid');
+            grid.innerHTML = '';
+
+            QUEST_CARDS.forEach(q => {
+                const isDone = !!profile.completed[q.id];
+                const card = document.createElement('div');
+                card.className = 'quest-card flex flex-col';
+                card.onclick = () => launchQuestStage(q.id);
+
+                const badgeHtml = isDone
+                    ? `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#16a34a] text-white font-bold text-xs sm:text-sm shadow">
+                         <span>✓</span><span>Done</span>
+                       </span>`
+                    : `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#facc15] text-[#5c3214] font-bold text-xs sm:text-sm shadow">
+                         <span>!</span><span>Unfinished</span>
+                       </span>`;
+
+                card.innerHTML = `
+                    <div class="grass-top-bar"></div>
+                    <div class="p-3 sm:p-3.5 flex-1 flex flex-col gap-3">
+                        <div class="relative rounded-2xl border-3 border-[#5c3214] h-40 sm:h-44 flex items-center justify-center shadow-inner"
+                             style="background-color: ${q.cardBg};">
+                            <div class="absolute top-2.5 right-2.5">${badgeHtml}</div>
+                            <div class="text-6xl sm:text-7xl drop-shadow-sm">${q.icon}</div>
+                        </div>
+                        <div class="cream-label-pill py-2.5 px-3 flex items-center justify-center gap-2">
+                            <span class="w-3 h-3 rounded-full shrink-0" style="background-color: ${q.dotColor};"></span>
+                            <span class="font-bold text-[#3d2314] text-base sm:text-lg tracking-wide">${q.title}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        /**
+         * ============================================================================
+         * 4. CONTINUOUS SIDE-SCROLLING 2D STAGE ENGINE + BOSS BATTLE (80~100 HP)
+         * ============================================================================
+         */
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const stage = {
+            active: false,
+            paused: false,
+            quest: null,
+            rounds: [],
+            roundIndex: 0,
+            heroPower: 0,
+            bossMaxHp: 90,
+            bossHp: 90,
+            bossX: 4600,
+            bossDefeated: false,
+            bossAttackCooldown: 0,
+            bossHurtTimer: 0,
+            worldWidth: 5200,
+            cameraX: 0,
+            groundY: 500,
+            celebrateTimer: 0,
+            wrongCooldown: 0
+        };
+
+        const hero = {
+            x: 110,
+            y: 350,
+            vx: 0,
+            vy: 0,
+            w: 54,
+            h: 64,
+            speed: 5.8,
+            jumpForce: -15.4,
+            grounded: false,
+            facing: 1,
+            walkPhase: 0
+        };
+
+        const keys = { left: false, right: false, up: false };
+        let platforms = [];
+        let mushrooms = [];
+        let slimes = [];
+        let stageItems = [];
+        let particles = [];
+        let energyBolts = [];
+
+        function resizeStageCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const oldGroundY = stage.groundY;
+            stage.groundY = Math.max(360, canvas.height - 135);
+            if (stage.active && oldGroundY) {
+                const dy = stage.groundY - oldGroundY;
+                hero.y += dy;
+                platforms.forEach(p => p.y += dy);
+                mushrooms.forEach(m => m.y += dy);
+                slimes.forEach(s => s.y += dy);
+                stageItems.forEach(it => it.y += dy);
+            }
+        }
+        window.addEventListener('resize', resizeStageCanvas);
+
+        window.launchQuestStage = function(questId) {
+            const q = QUEST_CARDS.find(x => x.id === questId);
+            if (!q) return;
+
+            audio.start();
+            stage.quest = q;
+            stage.rounds = getAgeRoundsForQuest(q.id, profile.ageTier);
+            stage.roundIndex = 0;
+
+            // Hero starts at 0 Power; Boss HP randomized between 80 and 100!
+            stage.heroPower = 0;
+            stage.bossMaxHp = Math.floor(Math.random() * 21) + 80; // 80..100
+            stage.bossHp = stage.bossMaxHp;
+            stage.bossDefeated = false;
+            stage.bossAttackCooldown = 0;
+            stage.bossHurtTimer = 0;
+
+            stage.active = true;
+            stage.paused = false;
+
+            if (!profile.questStats[q.id]) {
+                profile.questStats[q.id] = { stars: 0, attempts: 0 };
+            }
+            profile.questStats[q.id].attempts = (profile.questStats[q.id].attempts || 0) + 1;
+            saveProfile(`Started ${q.title} Quest (Boss ${stage.bossMaxHp} HP)`);
+
+            document.getElementById('hubScreen').classList.add('hidden');
+            document.getElementById('stageScreen').classList.remove('hidden');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stage.groundY = Math.max(360, canvas.height - 135);
+
+            buildFullAdventureCourse();
+        };
+
+        window.returnToHub = function() {
+            stage.active = false;
+            stage.paused = false;
+            closeGateModal();
+            closeSpinnerModal();
+            document.getElementById('stageScreen').classList.add('hidden');
+            document.getElementById('hubScreen').classList.remove('hidden');
+            updateHubHeader();
+            renderQuestGrid();
+        };
+
+        window.repeatStageVoice = function() {
+            if (!stage.active) return;
+            const round = stage.rounds[stage.roundIndex];
+            if (!round) {
+                speak(`You have ${stage.heroPower} power! Jump on the King Slime Boss at the end!`);
+                return;
+            }
+            if (round.soundId) {
+                audio.playCueSound(round.soundId);
+                setTimeout(() => speak(round.voice), 550);
+            } else {
+                speak(round.voice);
+            }
+        };
+
+        // Build a long continuous adventure trail with checkpoints leading up to the Boss!
+        function buildFullAdventureCourse() {
+            const gY = stage.groundY;
+            const q = stage.quest;
+            const numCheckpoints = stage.rounds.length;
+            const zoneSpacing = 920;
+
+            stage.bossX = 520 + numCheckpoints * zoneSpacing;
+            stage.worldWidth = stage.bossX + 520;
+            stage.cameraX = 0;
+            stage.celebrateTimer = 0;
+            stage.wrongCooldown = 0;
+
+            hero.x = 110;
+            hero.y = gY - hero.h - 10;
+            hero.vx = 0;
+            hero.vy = 0;
+            hero.facing = 1;
+
+            platforms = [];
+            mushrooms = [];
+            slimes = [];
+            stageItems = [];
+            particles = [];
+            energyBolts = [];
+
+            stage.rounds.forEach((round, rIdx) => {
+                const baseX = 340 + rIdx * zoneSpacing;
+
+                if (q.type === 'platform-orb') {
+                    platforms.push(
+                        { x: baseX, y: gY - 105, w: 185, h: 24 },
+                        { x: baseX + 260, y: gY - 155, w: 185, h: 24 },
+                        { x: baseX + 520, y: gY - 105, w: 185, h: 24 }
+                    );
+                    mushrooms.push({
+                        x: baseX + 205,
+                        y: gY - 38,
+                        w: 56,
+                        h: 38,
+                        bounce: 0
+                    });
+                    slimes.push({
+                        x: baseX + 440,
+                        minX: baseX + 390,
+                        maxX: baseX + 510,
+                        y: gY - 34,
+                        vx: 1.05,
+                        color: rIdx % 2 === 0 ? '#5CD647' : '#F472B6'
+                    });
+
+                    const orbOffsets = [
+                        { x: baseX + 52, y: gY - 192 },
+                        { x: baseX + 312, y: gY - 242 },
+                        { x: baseX + 572, y: gY - 192 }
+                    ];
+
+                    round.choices.forEach((c, cIdx) => {
+                        const pos = orbOffsets[cIdx % orbOffsets.length];
+                        stageItems.push({
+                            kind: 'orb',
+                            roundIdx: rIdx,
+                            id: c.id,
+                            label: c.label,
+                            bg: c.bg,
+                            speakName: c.speakName,
+                            x: pos.x,
+                            y: pos.y,
+                            w: 82,
+                            h: 78,
+                            bob: cIdx * 1.2 + rIdx,
+                            done: false
+                        });
+                    });
+                } else if (q.type === 'tracing-gate') {
+                    platforms.push({ x: baseX + 60, y: gY - 100, w: 180, h: 24 });
+                    mushrooms.push({ x: baseX + 270, y: gY - 38, w: 56, h: 38, bounce: 0 });
+
+                    stageItems.push({
+                        kind: 'trace-gate',
+                        roundIdx: rIdx,
+                        glyphKey: round.glyphKey,
+                        x: baseX + 430,
+                        y: gY - 170,
+                        w: 68,
+                        h: 170,
+                        opened: false
+                    });
+                } else if (q.type === 'speaking-gate') {
+                    platforms.push({ x: baseX + 60, y: gY - 100, w: 180, h: 24 });
+                    mushrooms.push({ x: baseX + 270, y: gY - 38, w: 56, h: 38, bounce: 0 });
+
+                    stageItems.push({
+                        kind: 'parrot-gate',
+                        roundIdx: rIdx,
+                        emoji: round.emoji,
+                        sayText: round.sayText,
+                        x: baseX + 430,
+                        y: gY - 170,
+                        w: 76,
+                        h: 170,
+                        opened: false
+                    });
+                }
+            });
+
+            // Boss Arena High Jump Platforms so player can leap onto the Boss!
+            platforms.push(
+                { x: stage.bossX - 240, y: gY - 115, w: 180, h: 24 },
+                { x: stage.bossX + 180, y: gY - 115, w: 180, h: 24 }
+            );
+            mushrooms.push({ x: stage.bossX - 310, y: gY - 38, w: 56, h: 38, bounce: 0 });
+
+            updateStageHudAndClue();
+            speak(`Defeat the King Slime Boss with ${stage.bossMaxHp} health! ` + (stage.rounds[0]?.voice || ''));
+        }
+
+        function updateStageHudAndClue() {
+            const powerEl = document.getElementById('heroPowerDisplay');
+            powerEl.textContent = stage.heroPower;
+            powerEl.classList.remove('power-pop');
+            void powerEl.offsetWidth;
+            powerEl.classList.add('power-pop');
+
+            document.getElementById('bossHpDisplay').textContent = `${Math.max(0, stage.bossHp)}/${stage.bossMaxHp}`;
+
+            const round = stage.rounds[stage.roundIndex];
+            if (round) {
+                document.getElementById('stageClueVisual').innerHTML = round.clueHtml || stage.quest.icon;
+            } else {
+                document.getElementById('stageClueVisual').innerHTML = `<span>👑 ⚔️ ⚡${stage.heroPower}</span>`;
+            }
+        }
+
+        function onCheckpointAnsweredCorrectly(solvedRoundIdx) {
+            // Clear remaining orbs for that checkpoint so player can keep moving forward smoothly!
+            stageItems.forEach(it => {
+                if (it.roundIdx === solvedRoundIdx) {
+                    it.done = true;
+                }
+            });
+
+            if (solvedRoundIdx >= stage.roundIndex) {
+                stage.roundIndex = solvedRoundIdx + 1;
+            }
+
+            audio.playWin();
+            spawnConfetti(hero.x + 28, hero.y, '#FFD230', 26);
+
+            // Open the Power-Up Spinner Wheel (+5 to +20 Power)!
+            openPowerSpinnerModal();
+        }
+
+        /**
+         * ============================================================================
+         * 4B. POWER-UP SPINNER WHEEL (+5 to +20 POWER REWARD)
+         * ============================================================================
+         */
+        const WHEEL_WEDGES = [
+            { val: 5, color: '#38bdf8', label: '+5' },
+            { val: 15, color: '#facc15', label: '+15' },
+            { val: 10, color: '#4ade80', label: '+10' },
+            { val: 20, color: '#f43f5e', label: '+20' },
+            { val: 8, color: '#a855f7', label: '+8' },
+            { val: 18, color: '#fb923c', label: '+18' },
+            { val: 12, color: '#2dd4bf', label: '+12' },
+            { val: 20, color: '#ec4899', label: '+20' }
+        ];
+
+        let spinnerState = {
+            angle: 0,
+            spinning: false
+        };
+
+        function drawWheelCanvas(angleRad) {
+            const wc = document.getElementById('wheelCanvas');
+            if (!wc) return;
+            const wctx = wc.getContext('2d');
+            const cx = wc.width / 2;
+            const cy = wc.height / 2;
+            const radius = cx - 6;
+            const slice = (Math.PI * 2) / WHEEL_WEDGES.length;
+
+            wctx.clearRect(0, 0, wc.width, wc.height);
+
+            WHEEL_WEDGES.forEach((w, i) => {
+                const start = angleRad + i * slice;
+                const end = start + slice;
+
+                wctx.beginPath();
+                wctx.moveTo(cx, cy);
+                wctx.arc(cx, cy, radius, start, end);
+                wctx.closePath();
+                wctx.fillStyle = w.color;
+                wctx.fill();
+                wctx.lineWidth = 3;
+                wctx.strokeStyle = '#ffffff';
+                wctx.stroke();
+
+                wctx.save();
+                wctx.translate(cx, cy);
+                wctx.rotate(start + slice / 2);
+                wctx.fillStyle = '#ffffff';
+                wctx.font = 'bold 24px Fredoka, sans-serif';
+                wctx.textAlign = 'right';
+                wctx.textBaseline = 'middle';
+                wctx.shadowColor = 'rgba(0,0,0,0.35)';
+                wctx.shadowBlur = 4;
+                wctx.fillText(w.label, radius - 18, 0);
+                wctx.restore();
+            });
+        }
+
+        function openPowerSpinnerModal() {
+            stage.paused = true;
+            keys.left = false;
+            keys.right = false;
+            keys.up = false;
+
+            spinnerState.spinning = false;
+            document.getElementById('spinResultBanner').classList.add('hidden');
+            document.getElementById('spinWheelBtn').disabled = false;
+            document.getElementById('spinWheelBtn').classList.remove('opacity-50');
+            document.getElementById('spinnerSubtitle').textContent = 'Tap SPIN to get +5 to +20 Power!';
+
+            drawWheelCanvas(spinnerState.angle);
+            document.getElementById('spinnerModal').classList.remove('hidden');
+            speak('Great job! Tap spin to get a power up!');
+        }
+
+        function closeSpinnerModal() {
+            document.getElementById('spinnerModal').classList.add('hidden');
+            stage.paused = false;
+        }
+
+        window.triggerPowerWheelSpin = function() {
+            if (spinnerState.spinning) return;
+            spinnerState.spinning = true;
+            const btn = document.getElementById('spinWheelBtn');
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            // Choose a random wedge index
+            const chosenIdx = Math.floor(Math.random() * WHEEL_WEDGES.length);
+            const slice = (Math.PI * 2) / WHEEL_WEDGES.length;
+            // Pointer is at top (-PI/2). Align chosen wedge center to -PI/2:
+            const targetBase = -Math.PI / 2 - (chosenIdx + 0.5) * slice;
+            const extraSpins = (4 + Math.floor(Math.random() * 2)) * Math.PI * 2;
+            const startAngle = spinnerState.angle;
+            // Normalize forward rotation
+            let delta = (targetBase - (startAngle % (Math.PI * 2)));
+            if (delta < 0) delta += Math.PI * 2;
+            const finalAngle = startAngle + extraSpins + delta;
+
+            const duration = 1750;
+            const startTime = performance.now();
+            let lastTickWedge = -1;
+
+            function animateSpin(now) {
+                const t = Math.min(1, (now - startTime) / duration);
+                // Cubic ease-out
+                const ease = 1 - Math.pow(1 - t, 3);
+                spinnerState.angle = startAngle + (finalAngle - startAngle) * ease;
+                drawWheelCanvas(spinnerState.angle);
+
+                const curWedge = Math.floor(((spinnerState.angle % (Math.PI * 2)) + Math.PI * 2) / slice) % WHEEL_WEDGES.length;
+                if (curWedge !== lastTickWedge) {
+                    lastTickWedge = curWedge;
+                    audio.playJump();
+                }
+
+                if (t < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    const gained = WHEEL_WEDGES[chosenIdx].val;
+                    stage.heroPower += gained;
+                    audio.playWin();
+
+                    const resBanner = document.getElementById('spinResultBanner');
+                    resBanner.textContent = `+${gained} ⚡ Power! (Total: ${stage.heroPower})`;
+                    resBanner.classList.remove('hidden');
+
+                    updateStageHudAndClue();
+                    speak(`Plus ${gained} power! You now have ${stage.heroPower} power! Keep running right!`);
+
+                    setTimeout(() => {
+                        closeSpinnerModal();
+                        // Speak next question if more checkpoints remain, or boss prompt if ready!
+                        if (stage.heroPower >= stage.bossHp) {
+                            speak(`You have ${stage.heroPower} power! Run right and defeat the King Slime Boss!`);
+                        } else {
+                            repeatStageVoice();
+                        }
+                    }, 1250);
+                }
+            }
+
+            requestAnimationFrame(animateSpin);
+        };
+
+        function spawnConfetti(x, y, color, count = 20) {
+            const palette = [color, '#f43f5e', '#38bdf8', '#4ade80', '#a855f7'];
+            for (let i = 0; i < count; i++) {
+                const ang = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+                const spd = 2.5 + Math.random() * 5;
+                particles.push({
+                    x,
+                    y,
+                    vx: Math.cos(ang) * spd,
+                    vy: Math.sin(ang) * spd - 2.5,
+                    size: 6 + Math.random() * 6,
+                    color: palette[i % palette.length],
+                    life: 45 + Math.random() * 15
+                });
+            }
+        }
+
+        /**
+         * ============================================================================
+         * 5. GATE OVERLAYS (TRACING RUNE GATE & SPEAKING PARROT GUARDIAN)
+         * ============================================================================
+         */
+        let activeGateItem = null;
+
+        function openGateModal(item) {
+            stage.paused = true;
+            activeGateItem = item;
+            keys.left = false;
+            keys.right = false;
+            keys.up = false;
+
+            document.getElementById('tracingGateView').classList.add('hidden');
+            document.getElementById('speakingGateView').classList.add('hidden');
+
+            if (item.kind === 'trace-gate') {
+                document.getElementById('gateTitleVisual').textContent = `✏️ ${item.glyphKey.toUpperCase()}`;
+                document.getElementById('tracingGateView').classList.remove('hidden');
+                initTraceCanvas(item.glyphKey);
+                repeatStageVoice();
+            } else if (item.kind === 'parrot-gate') {
+                document.getElementById('gateTitleVisual').textContent = '🦜 Parrot Guardian';
+                document.getElementById('speakTargetEmoji').textContent = item.emoji;
+                document.getElementById('speakTargetWord').textContent = `"${item.sayText}"`;
+                document.getElementById('micStatusLabel').textContent = 'Tap microphone to speak, or tap the green star below!';
+                document.getElementById('speakingGateView').classList.remove('hidden');
+                repeatStageVoice();
+            }
+
+            document.getElementById('gateModal').classList.remove('hidden');
+        }
+
+        window.closeGateModal = function() {
+            document.getElementById('gateModal').classList.add('hidden');
+            stage.paused = false;
+            activeGateItem = null;
+        };
+
+        const TRACE_GLYPHS = {
+            line: [[{ x: 0.5, y: 0.16 }, { x: 0.5, y: 0.84 }]],
+            wave: [[{ x: 0.15, y: 0.5 }, { x: 0.32, y: 0.22 }, { x: 0.5, y: 0.5 }, { x: 0.68, y: 0.78 }, { x: 0.85, y: 0.5 }]],
+            circle: [Array.from({ length: 25 }, (_, i) => {
+                const a = (i / 24) * Math.PI * 2 - Math.PI / 2;
+                return { x: 0.5 + Math.cos(a) * 0.25, y: 0.5 + Math.sin(a) * 0.33 };
+            })],
+            A: [
+                [{ x: 0.5, y: 0.18 }, { x: 0.3, y: 0.82 }],
+                [{ x: 0.5, y: 0.18 }, { x: 0.7, y: 0.82 }],
+                [{ x: 0.37, y: 0.58 }, { x: 0.63, y: 0.58 }]
+            ],
+            B: [
+                [{ x: 0.35, y: 0.18 }, { x: 0.35, y: 0.82 }],
+                [{ x: 0.35, y: 0.18 }, { x: 0.62, y: 0.25 }, { x: 0.62, y: 0.45 }, { x: 0.35, y: 0.5 }],
+                [{ x: 0.35, y: 0.5 }, { x: 0.65, y: 0.58 }, { x: 0.65, y: 0.76 }, { x: 0.35, y: 0.82 }]
+            ],
+            C: [Array.from({ length: 18 }, (_, i) => {
+                const a = -0.35 * Math.PI - (i / 17) * 1.3 * Math.PI;
+                return { x: 0.55 + Math.cos(a) * 0.25, y: 0.5 + Math.sin(a) * 0.32 };
+            })],
+            CAT: [
+                [{ x: 0.28, y: 0.3 }, { x: 0.16, y: 0.3 }, { x: 0.14, y: 0.5 }, { x: 0.16, y: 0.72 }, { x: 0.28, y: 0.72 }],
+                [{ x: 0.48, y: 0.28 }, { x: 0.37, y: 0.72 }],
+                [{ x: 0.48, y: 0.28 }, { x: 0.59, y: 0.72 }],
+                [{ x: 0.41, y: 0.55 }, { x: 0.55, y: 0.55 }],
+                [{ x: 0.68, y: 0.28 }, { x: 0.88, y: 0.28 }],
+                [{ x: 0.78, y: 0.28 }, { x: 0.78, y: 0.72 }]
+            ],
+            SUN: [
+                [{ x: 0.28, y: 0.3 }, { x: 0.16, y: 0.3 }, { x: 0.16, y: 0.5 }, { x: 0.28, y: 0.5 }, { x: 0.28, y: 0.72 }, { x: 0.15, y: 0.72 }],
+                [{ x: 0.40, y: 0.28 }, { x: 0.40, y: 0.68 }, { x: 0.50, y: 0.74 }, { x: 0.60, y: 0.68 }, { x: 0.60, y: 0.28 }],
+                [{ x: 0.70, y: 0.72 }, { x: 0.70, y: 0.28 }, { x: 0.86, y: 0.72 }, { x: 0.86, y: 0.28 }]
+            ]
+        };
+
+        let traceEngine = { strokes: [], points: [], hit: new Set(), drawing: false, last: null, done: false };
+
+        function initTraceCanvas(glyphKey) {
+            const c = document.getElementById('tracingCanvas');
+            const rect = c.parentElement.getBoundingClientRect();
+            c.width = Math.max(280, rect.width);
+            c.height = Math.max(200, rect.height);
+
+            const strokes = TRACE_GLYPHS[glyphKey] || TRACE_GLYPHS.line;
+            const points = [];
+            strokes.forEach(st => {
+                for (let i = 0; i < st.length - 1; i++) {
+                    for (let s = 0; s <= 12; s++) {
+                        const t = s / 12;
+                        points.push({
+                            x: (st[i].x + (st[i + 1].x - st[i].x) * t) * c.width,
+                            y: (st[i].y + (st[i + 1].y - st[i].y) * t) * c.height
+                        });
+                    }
+                }
+            });
+
+            traceEngine = { strokes, points, hit: new Set(), drawing: false, last: null, done: false };
+            document.getElementById('traceProgressBar').style.width = '0%';
+            drawTraceGuide();
+        }
+
+        function drawTraceGuide() {
+            const c = document.getElementById('tracingCanvas');
+            const tctx = c.getContext('2d');
+            tctx.clearRect(0, 0, c.width, c.height);
+
+            tctx.save();
+            tctx.strokeStyle = '#cbd5e1';
+            tctx.lineWidth = 20;
+            tctx.lineCap = 'round';
+            tctx.lineJoin = 'round';
+            tctx.setLineDash([16, 18]);
+
+            traceEngine.strokes.forEach(st => {
+                tctx.beginPath();
+                st.forEach((p, idx) => {
+                    const px = p.x * c.width;
+                    const py = p.y * c.height;
+                    if (idx === 0) tctx.moveTo(px, py);
+                    else tctx.lineTo(px, py);
+                });
+                tctx.stroke();
+            });
+            tctx.restore();
+
+            const s = traceEngine.strokes[0][0];
+            tctx.fillStyle = '#44B533';
+            tctx.beginPath();
+            tctx.arc(s.x * c.width, s.y * c.height, 15, 0, Math.PI * 2);
+            tctx.fill();
+            tctx.fillStyle = '#ffffff';
+            tctx.font = 'bold 16px Fredoka, sans-serif';
+            tctx.textAlign = 'center';
+            tctx.textBaseline = 'middle';
+            tctx.fillText('★', s.x * c.width, s.y * c.height + 1);
+        }
+
+        window.clearTracingCanvas = function() {
+            traceEngine.hit.clear();
+            traceEngine.done = false;
+            document.getElementById('traceProgressBar').style.width = '0%';
+            drawTraceGuide();
+        };
+
+        function handleTraceMove(x, y, start) {
+            if (traceEngine.done) return;
+            const c = document.getElementById('tracingCanvas');
+            const tctx = c.getContext('2d');
+            if (start) {
+                traceEngine.drawing = true;
+                traceEngine.last = { x, y };
+            }
+            if (!traceEngine.drawing) return;
+
+            const hue = (Date.now() / 7) % 360;
+            tctx.strokeStyle = `hsl(${hue}, 88%, 55%)`;
+            tctx.lineWidth = 17;
+            tctx.lineCap = 'round';
+            tctx.setLineDash([]);
+            tctx.beginPath();
+            tctx.moveTo(traceEngine.last.x, traceEngine.last.y);
+            tctx.lineTo(x, y);
+            tctx.stroke();
+            traceEngine.last = { x, y };
+
+            traceEngine.points.forEach((pt, idx) => {
+                if (!traceEngine.hit.has(idx) && Math.hypot(pt.x - x, pt.y - y) < 36) {
+                    traceEngine.hit.add(idx);
+                }
+            });
+
+            const pct = Math.min(100, Math.round((traceEngine.hit.size / Math.max(1, traceEngine.points.length)) * 100));
+            document.getElementById('traceProgressBar').style.width = `${pct}%`;
+            if (pct >= 75 && !traceEngine.done) {
+                finishTracingGate(false);
+            }
+        }
+
+        window.finishTracingGate = function(manual) {
+            if (traceEngine.done) return;
+            if (manual && traceEngine.hit.size < 3) {
+                audio.playGentleBoop();
+                speak('Trace the dotted line with your finger first!');
+                return;
+            }
+            traceEngine.done = true;
+            document.getElementById('traceProgressBar').style.width = '100%';
+            audio.playWin();
+            const solvedIdx = activeGateItem ? activeGateItem.roundIdx : stage.roundIndex;
+            if (activeGateItem) {
+                activeGateItem.opened = true;
+                spawnConfetti(activeGateItem.x + 30, activeGateItem.y + 80, '#a855f7', 28);
+            }
+            closeGateModal();
+            onCheckpointAnsweredCorrectly(solvedIdx);
+        };
+
+        (function initTracePointerEvents() {
+            const c = document.getElementById('tracingCanvas');
+            const pos = (e) => {
+                const r = c.getBoundingClientRect();
+                const cx = e.touches ? e.touches[0].clientX : e.clientX;
+                const cy = e.touches ? e.touches[0].clientY : e.clientY;
+                return { x: cx - r.left, y: cy - r.top };
+            };
+            c.addEventListener('mousedown', e => { const p = pos(e); handleTraceMove(p.x, p.y, true); });
+            c.addEventListener('mousemove', e => { if (traceEngine.drawing) { const p = pos(e); handleTraceMove(p.x, p.y, false); } });
+            window.addEventListener('mouseup', () => { traceEngine.drawing = false; });
+            c.addEventListener('touchstart', e => { e.preventDefault(); const p = pos(e); handleTraceMove(p.x, p.y, true); }, { passive: false });
+            c.addEventListener('touchmove', e => { e.preventDefault(); const p = pos(e); handleTraceMove(p.x, p.y, false); }, { passive: false });
+            c.addEventListener('touchend', () => { traceEngine.drawing = false; });
+        })();
+
+        window.startParrotMic = function() {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const label = document.getElementById('micStatusLabel');
+            const btn = document.getElementById('micBtn');
+            const vol = document.getElementById('micVolumeBar');
+            if (!SpeechRec) {
+                label.textContent = 'Say it out loud, then tap the green star button!';
+                return;
+            }
+            try {
+                const rec = new SpeechRec();
+                rec.lang = 'en-US';
+                btn.classList.add('mic-listening');
+                vol.style.width = '85%';
+                label.textContent = 'Listening... Speak now! 🎙️';
+                rec.onresult = () => {
+                    btn.classList.remove('mic-listening');
+                    vol.style.width = '100%';
+                    finishSpeakingGate();
+                };
+                rec.onerror = () => {
+                    btn.classList.remove('mic-listening');
+                    vol.style.width = '20%';
+                    label.textContent = 'Tap the green star button after saying it!';
+                };
+                rec.onend = () => {
+                    btn.classList.remove('mic-listening');
+                    vol.style.width = '20%';
+                };
+                rec.start();
+            } catch (e) {
+                label.textContent = 'Tap the green star button after saying it!';
+            }
+        };
+
+        window.finishSpeakingGate = function() {
+            audio.playWin();
+            const solvedIdx = activeGateItem ? activeGateItem.roundIdx : stage.roundIndex;
+            if (activeGateItem) {
+                activeGateItem.opened = true;
+                spawnConfetti(activeGateItem.x + 30, activeGateItem.y + 80, '#f43f5e', 28);
+            }
+            closeGateModal();
+            onCheckpointAnsweredCorrectly(solvedIdx);
+        };
+
+        /**
+         * ============================================================================
+         * 6. 2D PLATFORMER PHYSICS & RENDER LOOP
+         * ============================================================================
+         */
+        window.addEventListener('keydown', e => {
+            if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = true;
+            if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = true;
+            if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
+                keys.up = true;
+                if (stage.active && !stage.paused && hero.grounded) {
+                    hero.vy = hero.jumpForce;
+                    hero.grounded = false;
+                    audio.playJump();
+                }
+            }
+        });
+        window.addEventListener('keyup', e => {
+            if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = false;
+            if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = false;
+            if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') keys.up = false;
+        });
+
+        function bindBtn(id, key, jump) {
+            const el = document.getElementById(id);
+            const down = e => {
+                e.preventDefault();
+                keys[key] = true;
+                if (jump && stage.active && !stage.paused && hero.grounded) {
+                    hero.vy = hero.jumpForce;
+                    hero.grounded = false;
+                    audio.playJump();
+                }
+            };
+            const up = e => { e.preventDefault(); keys[key] = false; };
+            el.addEventListener('mousedown', down);
+            el.addEventListener('mouseup', up);
+            el.addEventListener('mouseleave', up);
+            el.addEventListener('touchstart', down, { passive: false });
+            el.addEventListener('touchend', up, { passive: false });
+        }
+        bindBtn('btnLeft', 'left', false);
+        bindBtn('btnRight', 'right', false);
+        bindBtn('btnJump', 'up', true);
+
+        function updateStage() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.18;
+                p.life--;
+                if (p.life <= 0) particles.splice(i, 1);
+            }
+            for (let i = energyBolts.length - 1; i >= 0; i--) {
+                const b = energyBolts[i];
+                b.x += b.vx;
+                b.y += b.vy;
+                b.life--;
+                if (b.life <= 0) energyBolts.splice(i, 1);
+            }
+            if (stage.celebrateTimer > 0) stage.celebrateTimer--;
+            if (stage.wrongCooldown > 0) stage.wrongCooldown--;
+            if (stage.bossAttackCooldown > 0) stage.bossAttackCooldown--;
+            if (stage.bossHurtTimer > 0) stage.bossHurtTimer--;
+
+            if (!stage.active || stage.paused) return;
+
+            if (keys.left) {
+                hero.vx = -hero.speed;
+                hero.facing = -1;
+                hero.walkPhase += 0.24;
+            } else if (keys.right) {
+                hero.vx = hero.speed;
+                hero.facing = 1;
+                hero.walkPhase += 0.24;
+            } else {
+                hero.vx *= 0.78;
+                if (Math.abs(hero.vx) < 0.2) hero.vx = 0;
+            }
+
+            hero.x += hero.vx;
+            hero.x = Math.max(24, Math.min(stage.worldWidth - hero.w - 24, hero.x));
+
+            // Friendly roaming slimes
+            slimes.forEach(s => {
+                s.x += s.vx;
+                if (s.x < s.minX || s.x > s.maxX) s.vx *= -1;
+            });
+
+            // Solid Gates for Tracing & Speaking quests
+            stageItems.forEach(item => {
+                if ((item.kind === 'trace-gate' || item.kind === 'parrot-gate') && !item.opened) {
+                    if (hero.x + hero.w > item.x - 6 && hero.x < item.x + item.w && hero.y + hero.h > item.y) {
+                        hero.x = item.x - hero.w - 10;
+                        hero.vx = 0;
+                        openGateModal(item);
+                    }
+                }
+            });
+
+            const prevBottom = hero.y + hero.h;
+            hero.vy += 0.68;
+            hero.y += hero.vy;
+            hero.grounded = false;
+
+            if (hero.y + hero.h >= stage.groundY) {
+                hero.y = stage.groundY - hero.h;
+                hero.vy = 0;
+                hero.grounded = true;
+            }
+
+            if (hero.vy >= 0) {
+                platforms.forEach(pl => {
+                    if (hero.x + hero.w * 0.75 > pl.x && hero.x + hero.w * 0.25 < pl.x + pl.w &&
+                        prevBottom <= pl.y + 10 && hero.y + hero.h >= pl.y) {
+                        hero.y = pl.y - hero.h;
+                        hero.vy = 0;
+                        hero.grounded = true;
+                    }
+                });
+            }
+
+            // Red Mushroom Trampoline
+            mushrooms.forEach(m => {
+                if (m.bounce > 0) m.bounce--;
+                if (hero.x + hero.w > m.x && hero.x < m.x + m.w &&
+                    hero.y + hero.h >= m.y && hero.y + hero.h <= m.y + m.h + 16 && hero.vy >= 0) {
+                    hero.vy = -20.5;
+                    hero.grounded = false;
+                    m.bounce = 16;
+                    audio.playBoing();
+                    spawnConfetti(m.x + 28, m.y, '#f43f5e', 10);
+                }
+            });
+
+            // Interactive Orbs along the continuous adventure trail
+            stageItems.forEach(item => {
+                if (item.bob !== undefined) item.bob += 0.06;
+
+                if (item.kind === 'orb' && !item.done) {
+                    const round = stage.rounds[item.roundIdx];
+                    if (hero.x + hero.w > item.x && hero.x < item.x + item.w &&
+                        hero.y + hero.h > item.y && hero.y < item.y + item.h) {
+                        if (round && item.id === round.targetId) {
+                            item.done = true;
+                            onCheckpointAnsweredCorrectly(item.roundIdx);
+                        } else if (stage.wrongCooldown === 0) {
+                            stage.wrongCooldown = 50;
+                            hero.vy = -9;
+                            audio.playGentleBoop();
+                            speak(`${item.speakName}. Try another one!`);
+                        }
+                    }
+                }
+            });
+
+            // End-of-Stage King Slime Boss Battle (80~100 HP)
+            if (!stage.bossDefeated) {
+                const bossW = 148;
+                const bossH = 132;
+                const bossTop = stage.groundY - bossH;
+                const hitBoss =
+                    hero.x + hero.w > stage.bossX &&
+                    hero.x < stage.bossX + bossW &&
+                    hero.y + hero.h > bossTop;
+
+                if (hitBoss && stage.bossAttackCooldown === 0) {
+                    stage.bossAttackCooldown = 42;
+                    hero.vy = -13.5;
+                    hero.vx = -9.5;
+
+                    if (stage.heroPower <= 0) {
+                        audio.playGentleBoop();
+                        speak('You need more power! Answer questions on the path and spin the power wheel!');
+                    } else {
+                        const dmg = Math.min(stage.bossHp, stage.heroPower);
+                        stage.bossHp -= dmg;
+                        stage.bossHurtTimer = 24;
+                        audio.playWin();
+                        spawnConfetti(stage.bossX + bossW / 2, bossTop + 40, '#FF7A22', 28);
+                        energyBolts.push({
+                            x: hero.x + 30,
+                            y: hero.y + 20,
+                            vx: 10,
+                            vy: -2,
+                            text: `-${dmg} 💥`,
+                            life: 45
+                        });
+                        updateStageHudAndClue();
+
+                        if (stage.bossHp <= 0) {
+                            stage.bossHp = 0;
+                            stage.bossDefeated = true;
+                            stage.celebrateTimer = 95;
+                            updateStageHudAndClue();
+
+                            const qId = stage.quest.id;
+                            profile.stars += 3;
+                            profile.completed[qId] = true;
+                            if (!profile.questStats[qId]) {
+                                profile.questStats[qId] = { stars: 3, attempts: 1 };
+                            } else {
+                                profile.questStats[qId].stars = (profile.questStats[qId].stars || 0) + 3;
+                            }
+                            saveProfile(`Defeated ${stage.quest.title} Boss (${stage.bossMaxHp} HP) with ${stage.heroPower} Power!`);
+                            speak(`Victory ${profile.name}! You defeated the King Slime Boss and finished ${stage.quest.title}!`);
+
+                            setTimeout(() => {
+                                if (stage.active) returnToHub();
+                            }, 2100);
+                        } else {
+                            speak(`Boom! Boss has ${stage.bossHp} health left! Power up more to finish him!`);
+                        }
+                    }
+                }
+            }
+
+            const targetCam = hero.x - canvas.width * 0.35;
+            stage.cameraX += (Math.max(0, Math.min(stage.worldWidth - canvas.width, targetCam)) - stage.cameraX) * 0.1;
+        }
+
+        function drawStage() {
+            if (!stage.active || !stage.quest) return;
+            const w = canvas.width;
+            const h = canvas.height;
+            const gY = stage.groundY;
+            const camX = stage.cameraX;
+            const q = stage.quest;
+
+            const grad = ctx.createLinearGradient(0, 0, 0, gY);
+            grad.addColorStop(0, q.skyTop);
+            grad.addColorStop(1, q.skyBot);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = '#FFD230';
+            ctx.beginPath();
+            ctx.arc(w - 105, 95, 48, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#8CE043';
+            for (let i = 0; i < 8; i++) {
+                const hx = i * 350 - (camX * 0.3) % 350 - 100;
+                ctx.beginPath();
+                ctx.arc(hx + 175, gY + 25, 200, Math.PI, 0);
+                ctx.fill();
+            }
+
+            ctx.save();
+            ctx.translate(-camX, 0);
+
+            ctx.fillStyle = '#8B5A2B';
+            ctx.fillRect(0, gY, stage.worldWidth, h - gY);
+            ctx.fillStyle = q.groundColor;
+            ctx.fillRect(0, gY - 14, stage.worldWidth, 24);
+
+            platforms.forEach(pl => {
+                ctx.fillStyle = '#6B3E1E';
+                ctx.beginPath();
+                ctx.roundRect(pl.x, pl.y, pl.w, pl.h, 10);
+                ctx.fill();
+                ctx.fillStyle = q.groundColor;
+                ctx.beginPath();
+                ctx.roundRect(pl.x, pl.y - 4, pl.w, 10, 8);
+                ctx.fill();
+            });
+
+            mushrooms.forEach(m => {
+                const sq = m.bounce > 0 ? 8 : 0;
+                ctx.fillStyle = '#FFF9E6';
+                ctx.fillRect(m.x + 16, m.y + 14 + sq, 24, 24 - sq);
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.arc(m.x + 28, m.y + 18 + sq, 28, Math.PI, 0);
+                ctx.fill();
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(m.x + 18, m.y + 8 + sq, 5, 0, Math.PI * 2);
+                ctx.arc(m.x + 38, m.y + 8 + sq, 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Friendly Slimes
+            slimes.forEach(s => {
+                ctx.fillStyle = s.color;
+                ctx.beginPath();
+                ctx.arc(s.x + 20, s.y + 34, 20, Math.PI, 0);
+                ctx.fill();
+                ctx.fillStyle = '#1e293b';
+                ctx.beginPath();
+                ctx.arc(s.x + 14, s.y + 24, 2.5, 0, Math.PI * 2);
+                ctx.arc(s.x + 26, s.y + 24, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            stageItems.forEach(item => {
+                if (item.kind === 'orb' && !item.done) {
+                    const fy = Math.sin(item.bob) * 6;
+                    ctx.fillStyle = item.bg;
+                    ctx.strokeStyle = '#6B3E1E';
+                    ctx.lineWidth = 5;
+                    ctx.beginPath();
+                    ctx.roundRect(item.x, item.y + fy, item.w, item.h, 22);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#1e293b';
+                    ctx.font = item.label.length > 3 ? 'bold 24px Fredoka, sans-serif' : 'bold 38px Fredoka, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(item.label, item.x + item.w / 2, item.y + item.h / 2 + fy);
+                } else if (item.kind === 'trace-gate' && !item.opened) {
+                    ctx.fillStyle = '#8b5cf6';
+                    ctx.beginPath();
+                    ctx.roundRect(item.x, item.y, item.w, item.h, 16);
+                    ctx.fill();
+                    ctx.font = '38px Fredoka, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('✏️', item.x + item.w / 2, item.y + item.h / 2);
+                } else if (item.kind === 'parrot-gate' && !item.opened) {
+                    ctx.fillStyle = '#3b82f6';
+                    ctx.beginPath();
+                    ctx.roundRect(item.x, item.y, item.w, item.h, 22);
+                    ctx.fill();
+                    ctx.font = '44px Fredoka, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('🦜', item.x + item.w / 2, item.y + item.h / 2);
+                }
+            });
+
+            // Draw King Slime Boss at the End of the Stage!
+            if (!stage.bossDefeated) {
+                const bossW = 148;
+                const bossH = 132;
+                const bx = stage.bossX + (stage.bossHurtTimer > 0 ? Math.sin(stage.bossHurtTimer * 1.4) * 8 : 0);
+                const by = gY - bossH;
+
+                // Giant Slime Dome
+                ctx.fillStyle = stage.bossHurtTimer > 0 ? '#fda4af' : '#e11d48';
+                ctx.strokeStyle = '#881337';
+                ctx.lineWidth = 5;
+                ctx.beginPath();
+                ctx.moveTo(bx, gY);
+                ctx.quadraticCurveTo(bx + bossW / 2, by - 28, bx + bossW, gY);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                // Golden Crown on Boss
+                ctx.font = '46px Fredoka, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('👑', bx + bossW / 2, by - 12);
+
+                // Cute Goofy Boss Eyes
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(bx + 48, by + 64, 15, 0, Math.PI * 2);
+                ctx.arc(bx + 100, by + 64, 15, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1e293b';
+                ctx.beginPath();
+                ctx.arc(bx + 45, by + 64, 7, 0, Math.PI * 2);
+                ctx.arc(bx + 97, by + 64, 7, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Boss Floating Health Bar above Crown
+                const barW = 150;
+                const barH = 18;
+                const barX = bx + bossW / 2 - barW / 2;
+                const barY = by - 58;
+                ctx.fillStyle = '#3d2314';
+                ctx.beginPath();
+                ctx.roundRect(barX - 3, barY - 3, barW + 6, barH + 6, 10);
+                ctx.fill();
+
+                ctx.fillStyle = '#fecdd3';
+                ctx.beginPath();
+                ctx.roundRect(barX, barY, barW, barH, 8);
+                ctx.fill();
+
+                const hpRatio = Math.max(0, stage.bossHp / stage.bossMaxHp);
+                ctx.fillStyle = '#f43f5e';
+                ctx.beginPath();
+                ctx.roundRect(barX, barY, barW * hpRatio, barH, 8);
+                ctx.fill();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 13px Fredoka, sans-serif';
+                ctx.fillText(`BOSS ${stage.bossHp}/${stage.bossMaxHp} HP`, bx + bossW / 2, barY - 12);
+            }
+
+            // Chibi Player Character
+            const by = hero.grounded ? Math.abs(Math.sin(hero.walkPhase)) * -5 : -4;
+            ctx.save();
+            ctx.translate(hero.x + hero.w / 2, hero.y + hero.h / 2 + by);
+            if (stage.celebrateTimer > 0) ctx.rotate(Math.sin(stage.celebrateTimer * 0.4) * 0.18);
+            ctx.scale(hero.facing, 1);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.16)';
+            ctx.beginPath();
+            ctx.ellipse(0, hero.h / 2 - by, 22, 6, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#ef4444';
+            ctx.beginPath();
+            ctx.moveTo(-8, -6);
+            ctx.lineTo(-28, 18 + Math.sin(hero.walkPhase) * 4);
+            ctx.lineTo(-4, 18);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = '#3b82f6';
+            ctx.beginPath();
+            ctx.roundRect(-16, -4, 32, 26, 10);
+            ctx.fill();
+
+            ctx.font = '44px Fredoka, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(profile.avatarEmoji, 0, -18);
+            ctx.restore();
+
+            // Floating Power Badge above Hero
+            if (stage.heroPower > 0) {
+                ctx.fillStyle = '#FFD230';
+                ctx.strokeStyle = '#593116';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.roundRect(hero.x - 4, hero.y - 36, 62, 22, 11);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = '#3d2314';
+                ctx.font = 'bold 13px Fredoka, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(`⚡${stage.heroPower}`, hero.x + 27, hero.y - 25);
+            }
+
+            // Damage Floating Popups
+            energyBolts.forEach(b => {
+                ctx.fillStyle = '#f43f5e';
+                ctx.font = 'bold 28px Fredoka, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(b.text, b.x, b.y);
+            });
+
+            particles.forEach(p => {
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            ctx.restore();
+        }
+
+        function loop() {
+            updateStage();
+            drawStage();
+            requestAnimationFrame(loop);
+        }
+
+        window.onload = function () {
+            loadSavedProfile();
+            initCloudDatabase();
+            requestAnimationFrame(loop);
+        };
+    </script>
+</body>
+</html>
